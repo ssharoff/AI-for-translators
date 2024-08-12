@@ -1,0 +1,377 @@
+% for slides
+%% \documentclass{beamer}
+% for handout
+\documentclass[handout]{beamer}
+
+\usepackage{stdpresent}
+
+\usepackage{CJKutf8}
+\newcommand{\ZH}[1]{\begin{CJK}{UTF8}{gbsn}#1\end{CJK}}
+%% \newcommand{\ZHT}[1]{\begin{CJK}{UTF8}{bsmi}#1\end{CJK}}
+
+%\usepackage{times}
+
+\title{Quantitative study of corpora}
+\subtitle{Frequency lists and collocations}
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{The size matters}
+\frame[<+->]{ \frametitle{Data science for translators}
+\begin{itemize}
+  \item ChatGPT and other AI models: Large Language Models
+  \item [$\to$] Large corpora: 90,000 years of reading for ChatGPT
+  \item Statistics for understanding how LLMs and MT engines work
+  \item Future careers for engaging with model developers
+\end{itemize}
+}
+\frame[<+->]{
+  \frametitle{History of corpus development}
+  \begin{itemize}
+    \item [] {\Huge \ZH{孝}} -- Critical studies in China: about 400 BC
+    \item Concordances: Eusebius of Caesaria (320) on canon tables % stubbs18history, Eusebius of Caesaria
+    \item Early corpora: stenography (K\"ading), language learning (GSL)
+    \item Computer corpora (1960s, 1MW): Brown Corpus (American) %%, LOB (British), Uppsala (Russian), LCMC (Chinese)
+    \item Megacorpus era (1990s, 100+MW): Bank of English and the British National Corpus (BNC)
+    \item Internet corpora (2000s, 1+GW): ukWac, en$10^{10}$
+\item [] \hspace{-2em}
+{\small
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+& BC &BNC{\scriptsize(a)}&BNC{\scriptsize(ipm)}&ukWac&en$10^{10}$\\\hline
+soccer&  1&1,321&13&8&8\\\hline
+integrity& 10 &1467&15&16&23\\\hline
+{\scriptsize undermine integrity}& 0 &11&0.11&0.07&0.10\\\hline
+year&1,589&163,930&1,639&1,631&1,425\\\hline
+\end{tabular}
+}
+  \end{itemize}
+}
+
+\section{Words in frequency lists}
+\subsection{Words: types and tokens}
+\frame[<+->]{
+
+\frametitle{How to count words}
+\begin{itemize}
+  \item How many words are there in English?
+    \item \textit{A cat is on a mat. 32,200 cats are on a place-mat.}
+    \item Tokens: sequences separated by punctuation (12-14)
+    \item [??] \textit{N-acetyl-p-aminophenol, trimethyl-xanthine-dione}
+    \item [??] \textit{translation-oriented, Hong Kong, d'Arcy, John's, I'm}
+    \item [??] Other languages: Arabic, Chinese, German\\
+      \textit{Fachhochschulratspr\"asident}
+    \item [] \ZH{点击进入联合国安全理事会网站，了解更多信息。}
+    \item Types: a set of equivalent tokens
+    \item [??] word forms or lemmas: \textit{cat} vs.~\textit{cats}, $be / are$
+    \item [] or lemmas+POS: \textit{kind}.NN vs.~\textit{kind}.JJ
+    \item Ranking types in frequency lists
+    \item [??] \textit{I do \underline{uh main-} mainly business management}
+  \end{itemize}
+}
+
+\frame[<+->]{ \frametitle{Vocabulary size}
+      \begin{itemize}
+      \item []
+  \begin{tabular}{l|rrr}
+Corpus & Tokens = $N$ & Types = $|V|$\\\hline
+Shakespeare & 884 K & 31 K\\
+Brown corpus & 1 M & 38 K\\
+Switchboard & 2.4 M & 20 K\\
+BNC & 100M & 665K \\
+ukWac & 2GW & 11 M \\
+  \end{tabular}
+    \item Around 100,000 in ranking (247 examples in ukWac):\\
+{\small     \begin{tabular}{lllllll}
+Foch	&Havard	&deliriously	&genotypic	&under-15	&wana	&zucchini\\
+%% %% $\overrightarrow{x}_{KYM}$ & 
+%% 0.06&0	&0.0003	&0	&0	&0	&0\\
+%% %% $\overrightarrow{x}_{SWK}$ & 
+%% 0	&0	&0	&0	&0	&0.025	&0.03\\
+    \end{tabular}
+}
+\item {\small \textit{Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch}}: \\
+Rank in BNC: 543226, 1 example\\
+Rank in ukWac: 294309, 41 examples
+\item [$\to$] We need many texts for good \textit{lexical}  coverage\\
+      Texts: 100MW=290,000 pages (350 W/p) \\
+      Speech: 1,000,000 hr (100 W/m)
+    \item 2810 instances of \textit{f**k} in BNC (spoken)\\
+      Does this mean that people swear frequently?
+      \end{itemize}
+}
+
+\section{Comparing frequency lists}
+%% The frequencies follow Zipf's Law (1935), which basically means that about half of them occur once only, a quarter twice only, and so on. So for the first million-word corpus of general written American English (the Brown corpus), there was a vocabulary of different word forms of 69002, of which 35065 occurred once only. At the other end of the frequency scale, the commonest word, the has a frequency of 69970, which is almost twice as common as the next one, of, at 36410. 
+% and other tables from Sinclair
+\frame{
+  \frametitle{The BNC frequency list}
+{\scriptsize
+  \begin{tabular}{|r|l|l|r|r|r|r|r|}
+\hline
+{\bf Rank}&	{\bf Lemma}&	POS&	AbsFrq &	Frq(ipm)&	Frq\%  &	Coverage&	Cov\%\\\hline
+1&	\textbf{the}&	det&	6187267&	61872.67&	6.187\%&	61872.67&	6.19\%\\
+2&	\textbf{be}&	v&	4239632&	42396.32&	4.240\%&	104268.99&	10.43\%\\
+3&	\textbf{of}&	prep&	3093444&	30934.44&	3.093\%&	135203.43&	13.52\%\\
+4&	\textbf{and}&	conj&	2687863&	26878.63&	2.688\%&	162082.06&	16.21\%\\
+5&	\textbf{a}&	det&	2186369&	21863.69&	2.186\%&	183945.75&	18.39\%\\
+6&	\textbf{in}&	prep&	1924315&	19243.15&	1.924\%&	203188.90&	20.32\%\\
+7&	\textbf{to}&	inf-to&	1620850&	16208.50&	1.621\%&	219397.40&	21.94\%\\
+8&	\textbf{have}&	v&	1375636&	13756.36&	1.376\%&	233153.76&	23.32\%\\
+9&	\textbf{it}&	pron&	1090186&	10901.86&	1.090\%&	244055.62&	24.41\%\\
+10&	\textbf{to}&	prep&	1039323&	10393.23&	1.039\%&	254448.85&	25.44\%\\\hline
+\hline
+2000&	\textbf{connect}&v&	4510&	45.10&	0.005\%&	775928.30&	77.59\%\\
+2001&	\textbf{fundamental}&a&	4508&	45.08&	0.005\%&	775973.38&	77.60\%\\
+2002&	\textbf{plane}&	n&	4505&	45.05&	0.005\%&	776018.43&	77.60\%\\
+2003&	\textbf{height}&	n&	4505&	45.05&	0.005\%&	776063.48&	77.61\%\\
+2004&	\textbf{opening}&n&	4504&	45.04&	0.005\%&	776108.52&	77.61\%\\
+2005&	\textbf{lesson}&	n&	4503&	45.03&	0.005\%&	776153.55&	77.62\%\\
+2006&	\textbf{similarly}&adv&	4502&	45.02&	0.005\%&	776198.57&	77.62\%\\
+2007&	\textbf{shock}&	n&	4502&	45.02&	0.005\%&	776243.59&	77.62\%\\
+2008&	\textbf{rail}&	n&	4502&	45.02&	0.005\%&	776288.61&	77.63\%\\
+\hline
+  \end{tabular}
+}
+}
+
+\frame[<+->]{
+  \frametitle{Problems with frequency lists}
+  \begin{itemize}
+    \item the object of counting (\textit{colour, gonna, with respect to})
+    \item the ``whelks'' problem (Adam Kilgarriff)
+    \item [] \textit{A marine gastropod mollusc of the genus Buccinum, having a turbinate shell, esp. B. undatum, common on the European and North American coasts, much used for food. } (OED)
+  \item Frequency spikes (\textit{whelk} problem);\\
+    {\small \textit{comply,  therapy,  exhaust,  \textbf{gastric},  swimming,  darling,  celebration}\\ 
+    \textit{mushroom, outrage, presently, \textbf{absorptance}, retrieve, dirt, skipper}}
+    \item [] {\small Journal of Gastroentorology and Hepatology}: 713 kW in the BNC\\
+      \textit{peptide, endoscopy}: the top 3000 BNC words
+  \item Frequency drops (\textit{banana}-\textit{toothbrush} problem)\\
+{\small\textit{anchor, instrumental, sodium, \textbf{banana}, tilt, hunter, armour}\\
+\textit{leer, enthrall, sheaf, \textbf{toothbrush}, dungeon, stocky, lawsuit }
+}
+    \item reliability: what happens with another corpus?
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Frequency lists from three corpora}
+{\footnotesize
+  \begin{tabular}{|l|r||l|r||l|r|}
+\hline
+the &	22905 &	 the	 &	7802100 &	the&	6187267\\
+of &	12710 &	 be	 &	4523108 &	be&	4239632\\
+be &	10686 &	 to	 &	3409757 &	of&	3093444\\
+a &	9952 &	 of	 &	3338835&	and&	2687863\\
+and &	8323 &	 a	 &	3337996&	a&	2186369\\
+in &	7010 &	 and	 &	3174355&	in&	1924315\\
+to &	6502 &	 in	 &	2622013&	to&	1620850\\
+that &	4392 &	 have &	1623255&	have&	1375636\\
+price&	3080 &	 that &	1594191&	it&	1090186\\
+for &	2912 &	 for	 &	1296688&	to&	1039323\\
+it &	2674 &	 say	 &	1126948&	for&	887877\\
+we &	2534 &	 it	 &	1097742&	i&	884599\\
+have &	2514 &	 he	 &	1013629&	that&	760399\\
+cost &	2251 &	on	 &	972005 &	you&	695498\\
+by &	2034 &	with	 &	924460 &	he&	681255\\
+this &	2003 &	not	 &	912954 &	on&	680739\\
+demand& 1944 &	as	 &	784007 &	with&	675027\\
+on &	1882 &	at    &	739731 &	do&	559596\\
+\hline
+\end{tabular}
+}
+}
+
+\frame{
+  \frametitle{BNC vs. New York Times}
+{\footnotesize
+  \begin{tabular}{|r|l|l||r|l|l|}
+\hline
+{\bf Rank}&{\bf Frq}&{\bf Lemma}&{\bf Rank}&{\bf Frq}&{\bf Lemma}\\\hline
+3983&2560&environmentalist&3983&1822&accent \\
+3984&2559&casual	&3984&1822&elder \\
+3985&2559&scratch&3985&1822&twentieth \\
+3986&2557&troy	&3986&1822&vietnam \\
+3987&2556&petition&3987&1821&unnecessary\\
+3988&2555&pipe	&3988&1821&underneath \\
+3989&2554&roast	&3989&1819&invent \\
+3990&2554&genre	&3990&1819&timing \\
+3991&2554&merchant&3991&1819&recipe \\
+3992&2551&canyon&3992&1818&hungry \\
+3993&2551&flip	&3993&1818&morgan \\
+3994&2550&automatic&3994&1817&autonomy \\
+3995&2549&efficient&3995&1816&cave \\
+3996&2549&grind	&3996&1815&delegation \\
+3997&2549&bug	&3997&1815&tactic \\
+3998&2548&ongoing&3998&1814&diagram \\
+3999&2547&fatal	&3999&1814&influential\\
+\hline
+\end{tabular}
+}
+}
+
+
+\frame[<+->]{
+  \frametitle{Comparing frequencies}
+  \begin{itemize}
+\item []
+\begin{tabular}{|l|c|c|c|}
+\hline
+&Corpus 1&Corpus 2&Total\\\hline
+Frequency of word&a&b&a+b\\\hline
+Frequency of other words&c-a&d-b&c+d-a-b\\\hline
+Corpus size&c&d&c+d\\\hline
+\end{tabular}
+
+\item $loglike=2(a\ln(\frac{a}{E1})+b\ln(\frac{b}{E2})); E1=c\frac{a+b}{c+d}; E2=d\frac{a+b}{c+d}$
+
+\item []
+  \begin{tabular}{|l||r|r||r|}
+\hline
+Word&	Corpus1&	Corpus2&	LL-score\\
+\hline
+price&	147048&	26741&	910+\\
+you&	39749&	603306	&	6005-\\
+put&	38897&	61016&	51-\\
+\hline
+  \end{tabular}
+%% \item $log-like(price_1 price_2) = $\\
+%%       $log-like(you_1 you_2) = $
+\item [HW] 
+  \begin{tabular}{lrrr}
+ & BNC (spoken) & BNC (written) & ukWac \\
+\textit{f**k} &  2810 & 1603 & 16309 \\
+Corpus size   & 10M & 90M & 2000M\\
+  \end{tabular}
+  \end{itemize}
+}
+
+
+\frame[<+->]{
+  \frametitle{A keyword list}
+\begin{tabular}{|l|r||l|r|}
+\hline
+\textbf{More in BNC}&\textbf{LL-score}&\textbf{More in NYT}&\textbf{LL-score}\\
+\hline
+
+you&6005.14&say&8559.54\\
+\hline
+I&5271.42&percent&4513.35\\
+\hline
+she&3334.57&bush&2364.29\\
+\hline
+be&2411.89&gore&1982.47\\
+\hline
+do&1610.71&president&1518.25\\
+\hline
+they&1502.79&atlanta&1468.84\\
+\hline
+your&1282.15&game&1258.34\\
+\hline
+can&1191.74&clinton&1240.37\\
+\hline
+what&1090.53&york&1214.84\\
+\hline
+my&1023.56&news&1199.25\\
+\hline
+
+\end{tabular}
+}
+
+\frame[<+->]{
+  \frametitle{A keyword list}
+\begin{scriptsize}
+\begin{center}\begin{tabular}{|l|l|r||l|l|r|}
+\hline
+\multicolumn{3}{|c||}{\textbf{More frequent in I-DE }} & \multicolumn{3}{|c|}{\textbf{More frequent in IDS}}\\\hline
+\textbf{Word form}&\textbf{Gloss}&\textbf{LLscore}&\textbf{Word form}&\textbf{Gloss}&\textbf{LLscore}\\\hline
+ich	&I		&1,789.63	&Mark	&Mark	&796.69\\\hline
+dass	&that (new)	&1226.98	&Uhr	&hour	&476.57\\\hline
+mir	&me$_{dat}$	&533.53	&Prozent	&percent	&302.65\\\hline
+wir	&we$_{nom}$	&515.32&da{\ss}	&that (old)	&307.32\\\hline
+Sie	&you$_{pol}$	&469.46&sei	&be-subjunc	&291.95\\\hline
+du	&you$_{fam}$	&376.29&dpa	&dpa	&262.05\\\hline
+mich	&me$_{acc}$	&458.73&bis	&to-temporal	&258.87\\\hline
+oder	&or		&432.71&Millionen	&millions	&235.37\\\hline
+Ich	&I		&416.26&gestern	&yesterday	&225.47\\\hline
+du	&you$_{fam}$	&297.20&SPD	&SPD	&181.97\\\hline
+kann	&can		&295.89&sagt	&said	&177.19\\\hline
+uns	&us$_{acc}$	&284.49&Franken	&franc	&127.02\\\hline
+the	&-		&282.68&taz	&taz	&120.24\\\hline
+\end{tabular}\end{center}
+\end{scriptsize}						
+}
+
+\frame[<+->]{
+  \frametitle{Putting frequencies into dictionaries}
+  \begin{itemize}
+  \item Frequency counts for words (GSL, CCED, LDOCE) 
+  \item Different indications: \\
+
+    \begin{tabular}{l l l}
+		&CCED		&LDOCE\\\hline
+      go 	& $\blacklozenge\blacklozenge\blacklozenge\blacklozenge\blacklozenge$&S1, W1\\
+      significant&$\blacklozenge\blacklozenge\blacklozenge \blacklozenge$	&S3, W1\\
+      calm	&$\blacklozenge\blacklozenge\blacklozenge$		&S3, W3\\
+      polish 	&$\blacklozenge \blacklozenge$&-,-\\
+      bungalow	&$\blacklozenge$		&S3, -\\
+      sanction	&$\blacklozenge\blacklozenge\blacklozenge \blacklozenge$&	-, -
+    \end{tabular}
+  \end{itemize}
+}
+
+
+%\section{Collocations}
+%% \frame[<+->]{
+%%   \frametitle{Collocations}
+
+%%   \begin{itemize}
+%%     \item Collocations of a given word are statements of the habitual or customary places of that word (Firth, 1957) \\you shall know a word by the company it keeps.
+%%     \item a sequence of two or more consecutive words, that has characteristics of a syntactic and semantic unit
+%%     \item Terms: \textit{stiff breeze, weapons of mass destruction}
+%%     \item Phrasal verbs: \textit{get off, tell off, look up, make up}
+%%     \item Support verb constuctions (light verbs): \textit{take a shower, make sense}
+%%     \item Stock phrases: \textit{the rich and powerful, by and large}
+%%     \item Non-compositionality: \\
+%% \textit{strong} vs. \textit{powerful}: \textit{tea}/\textit{car}
+%%     \end{itemize}
+%% }
+
+\frame[<+->]{\frametitle{Comparing frequencies and translations}
+\begin{itemize}
+  \item Intellitext\\
+    \url{http://corpus.leeds.ac.uk/itweb/}
+  \item Kelly database\\
+    \url{http://kelly.sketchengine.co.uk/}
+  \item Loglikelihood calculator: \\{\small \url{http://ucrel.lancs.ac.uk/llwizard.html}}
+  \item The SketchEngine: \url{https://app.sketchengine.eu/}
+  \end{itemize}
+}
+
+\frame{
+  \frametitle{Basic points}
+
+    \begin{itemize}
+      \item Size matters: 100 MW for moderately frequent words
+      \item Counting words: tokens and types 
+      \item Relative frequency and coverage
+      \item Reliability of frequency lists
+      \item Comparing frequencies using Intellitext
+    \end{itemize}
+    \begin{block}{For the next session}
+      Find frequency lists for your languages
+    \end{block}
+\begin{block}{To read:}
+Ch. 3 of \textbf{McEnery, Wilson}, \textit{Corpus Linguistics}\\
+Unit A6 of \textbf{McEnery, Xiao, Tono}, \textit{Corpus-based language studies: an advanced resource book}\\
+Ch. 2 and 3 of \textbf{Biber, Reppen}, \textit{The Cambridge Handbook of English Corpus Linguistic}
+\end{block}
+
+}
+
+\end{document}
+
+
