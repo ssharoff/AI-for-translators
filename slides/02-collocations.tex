@@ -1,0 +1,300 @@
+% for slides
+\documentclass{beamer}
+% for handout
+%% \documentclass[handout]{beamer}
+
+\usepackage{stdpresent}
+%\newcommand{\R}[1]{{\selectlanguage{russian}#1}}
+
+%\usepackage{times}
+
+\title{Statistics of collocations}
+
+\begin{document}
+
+\maketitlepage
+
+\section{Collocations}
+\subsection{Definitions}
+\frame[<+->]{
+  \frametitle{Collocations}
+
+  \begin{itemize}
+    \item `Collocations of a given word are statements of the habitual or customary places of that word' (Firth, 1957) \\`you shall know a word by the company it keeps'
+    \item collocations -- constructions; collocates -- words in collocations, 
+    \item Non-compositionality: \textit{strong} vs. \textit{powerful}: \textit{tea} or \textit{car}
+      \\ \textit{released from prison} vs \textit{discharged from hospital}
+      \\ \textit{full knee replacement} vs \textit{total knee replacement}
+    \end{itemize}
+  \begin{block}{Examples of collocations}
+    \begin{itemize}
+    \item Terms: \textit{stiff breeze, weapons of mass destruction}
+    \item Phrasal verbs: \textit{get off, tell off, look up, make up}
+    \item Support verb constuctions: \textit{take a shower, make sense, }
+    \item Stock phrases: \textit{the rich and powerful, by and large}
+    \end{itemize}
+  \end{block}
+}
+
+\subsection{Methods for counting}
+\frame[<+->]{ \frametitle{Methods for counting}
+\begin{itemize}
+   \item N-grams: sequences of N words (bi-, trigram)
+   \item \textit{to be or not to be}\\
+     unigrams $\to$ \textit{to, be} (2), \textit{or, not} (1)\\
+     bigrams $\to$ \textit{to be} (2);  \textit{be or} (1);  \textit{or not} (1);  \textit{not to} (1)\\
+     trigrams $\to$ \textit{to be or} (1);  \textit{be or not} (1);  \textit{or not to} (1)
+   \item Skip-grams: pairs in a window of N words:\\
+     W2: \textit{to be} (2);  \textit{to or};  \textit{be or};  \textit{be not}
+\end{itemize}
+}
+
+\frame[<+->]{ \frametitle{Counting bigrams}
+  \begin{itemize}
+  \item [] 
+{\footnotesize
+\begin{tabular}{|l|r||l|r|}
+\hline
+\multicolumn{2}{|c||}{\textbf{Bigrams}}&\multicolumn{2}{c|}{\textbf{Trigrams}}\\
+\hline
+ of the&   7211.67&i       do      not &522.24\\
+ in the&   5167.19&there   be      a&	401.55\\
+ it be&	   4050.64&it      be      a&	372.39\\
+ to the&   2617.17&one     of      the&	356.03\\
+ be a&	   2366.99&it      be      not&	348.88\\
+ do not&   2230.41&there   be      no&	292.65\\
+ on the&   2181.97&be      able    to&	241.46\\
+ have be&  2151.05&do      not     know&232.90\\
+ there be& 2017.23&the     end     of&	213.57\\
+\hline
+  \end{tabular}
+}
+
+  \item []
+{\footnotesize
+ \begin{tabular}{|l|r|}
+\hline
+  last    year&      107.22 \\
+  prime   minister&  97.18  \\
+  last    night&     84.95  \\
+  first   time&	     83.27  \\
+  other   hand&	     56.12  \\
+  last    week&	     51.27  \\
+  other   people&    42.01  \\
+  next    year&	     40.35  \\
+  soviet  union&     38.95  \\
+  young   man&	     38.29  \\
+\hline
+  \end{tabular}
+}
+  \end{itemize}
+}
+
+\section{Statistical measures}
+\subsection{Notions of probability}
+\frame[<+->]{
+  \frametitle{Statistics of surprise}
+  \begin{itemize}
+     \item Null hypothesis: words are distributed at random
+     \item $F_i$ --- number of occurrences of word$_i$
+     \item $F_{ij}$ --- number of joint occurrences of the two words (i and j)
+     \item $N$ --- corpus size
+     \item $O_{ij}$ --- observed probability, $E_{ij}$ --- expected probability, 
+     \item $O_{ij}=\frac{F_{ij}}{N}$ --- observed probability, 
+     \item $E_{ij}=\frac{F_i}{N}\times\frac{F_j}{N}$ --- expected probability, 
+\item []
+\footnotesize{
+  \begin{tabular}{|c| c c c c c c|}
+\hline
+    &1&2&3&4&5&6\\
+\hline
+   1&.&.&.&\textbf{x}&.&.\\
+   2&.&.&.&.&.&.\\
+   3&.&.&.&.&.&.\\
+   4&.&.&.&.&.&.\\
+   5&.&.&.&.&.&.\\
+   6&.&.&.&.&.&.\\
+\hline
+  \end{tabular}
+}
+  \end{itemize}
+}
+
+\frame[<+->]{ \frametitle{Notation for the probabilities}
+\begin{itemize}
+  \item The space of events (S)\\
+    What is our event space?
+  \item $p(x | \text{partial knowledge})$
+  \item Conditional independence:\\
+    Knowing about X doesn't tell me about Y
+  \item [] $p(Y | X ) = p( Y )$\\
+    $p(X | Y ) = p( X )$
+  %% \item NOT in language
+  \item Conditional probability\\
+    \vspace{1ex} $p(X | Y ) = \frac{p(X \& Y)}{p(Y)}$
+  \item  \includegraphics[width=0.6\textwidth]{align3} \\
+$p(house|maison)=0.476$\\
+$p(home|maison)=0.104$\\
+$p(parent|maison)=0.077$\\
+$p(flower|fleur)=0.039$\\
+$p(pollen|fleur)=0.020$
+\end{itemize}
+}
+
+
+
+\subsection{Statistics of surprise}
+\frame{
+  \frametitle{Measures of collocations}
+  \begin{itemize}
+     \item $O_{ij}=\frac{F_{ij}}{N}$ --- observed probability, 
+     \item $E_{ij}=\frac{F_i}{N}\times\frac{F_j}{N}$ --- expected probability, 
+     \item $MI_{ij}=\log \left( {\frac{O_{ij} }{E_{ij} }} \right)$ --- Mutual Information score,
+     \item $Dice_{ij}={2 \times \frac{O_{ij} }{E_i+E_j }} $ --- Dice score,
+     \item $T_{ij}=\frac{O_{ij} -E_{ij} }{\sqrt {O_{ij} } }$ --- T-score
+     \item Log-likelihood (LL) score from contingency table\\
+       \begin{tabular}{l l l}
+            & word2    & $\neg$ word2 \\\hline
+       word1& $F_{ij}$ & $F_i-F_{ij}$ \\\hline
+$\neg$ word1& $F_j-F_{ij}$ & $N-F_{ij}$ \\\hline
+       \end{tabular}
+     \item [] $loglike=2(a\ln(\frac{F_i}{E1})+b\ln(\frac{F_j}{E2})); E1=c\frac{a+b}{c+d}; E2=d\frac{a+b}{c+d}$
+  \end{itemize}
+}
+
+\frame{ \frametitle{Examples of predictions}
+\begin{itemize}
+     \item \textit{new company}, $F_{ij}=358, F_i=105,645, F_j=57,118, N=100,000,000$
+     \item \textit{private company}, $F_{ij}=423, F_i=16,357, F_j=57,118, N=100,000,000$
+     \item \textit{post office}, $F_{ij}=1,425, F_i=10,871, F_j=29,132, N=100,000,000$
+%% 	 $LL_{ij}=$&$\log L(a,c_1,p) + \log L (b, N-c_1, p) - $\\
+%% 	 &$\log L(a,c_1,p_1) - \log L(c, N-c_1, p_2)$\\
+%% \\
+%% 	 &$L(k,n,x)=x^k(1-x)^{n-k}$
+\end{itemize}
+       \begin{tabular}{lrrrr}
+                & MI score & Dice & T-score & LL-score \\
+\textit{new company}	&	6.19 &	2.82 &	15.97&	761.32\\
+\textit{private company}&	5.74 &	7.61 &	20.18&	2,548.55\\
+\textit{post office}	&	8.59 &	9.44 &	25.11&	6,354.51\\
+       \end{tabular}
+}
+
+%% \section{Implications of frequency analysis}
+%% \subsection{Logarithms and Zipf's law}
+%% \frame[<+->]{
+%%   \frametitle{Logarithms and Zipf's law}
+%%   \begin{itemize}
+%%      \item [] 
+%%        \begin{tabular}{l l}
+%% 	$\log_2(4)=2$	&$\leftarrow 2^2=4$\\
+%% 	$\log_2(16)=4$	&$\leftarrow 2^4=16$\\
+%% 	$\log_2(256)=8$	&$\leftarrow 2^8=256$
+%%        \end{tabular}
+%%      \item [] $\log_2(1024)=10 \leftarrow 2^{10}=1024$
+%%      \item $\log(a\times b)=\log(a)+\log(b)$
+%% %     \item $\log_2(6187267)=10$
+%%      \item [] : 
+%%     \begin{tabular}{|r|l|r|}
+%%       \hline
+%%       Frequency	&Word form	&Rank\\
+%%       \hline
+%% 6187267	&the	&1\\
+%% 2941444	&of	&2\\
+%% 2682863	&and	&3\\
+%% 2126369	&a	&4\\
+%% 1812609	&in	&5\\
+%% 47141	&member	&200\\
+%% 10071	&useful	&1000\\
+%% 1024	&miserable	&5000\\
+%%       \hline
+%%     \end{tabular}
+
+%%   \end{itemize}
+%% }
+
+%% \frame[<+->]{
+%%   \frametitle{Zipfian distribution in the BNC}
+%%   \begin{itemize}
+%% \item []
+%%     \begin{tabular}{|r|l|r|r|r|}
+%%       \hline
+%%       Frequency	&Word	&Rank	&Log(frq)&Log(rank)\\
+%%       \hline
+%% 6187267	&the	&1&22.56&0.00\\
+%% 2941444	&of	&2&21.49&1.00\\
+%% 2682863	&and	&3&21.36&1.58\\
+%% 2126369	&a	&4&21.02&2.00\\
+%% 1812609	&in	&5&20.79&2.32\\
+%% 47141	&member	&200&15.52&7.64\\
+%% 10071	&useful	&1000&13.3&9.97\\
+%% 1024	&miserable	&5000&10.00&12.29\\
+%%       \hline
+%%     \end{tabular}
+%% % \item [] $\log(frq) \approx C-\log(rank)$
+%% % 	$\log(frq1)=C-\log(1)$
+%%   \end{itemize}
+%% }
+
+%% \frame[<+->]{
+%%   \frametitle{Frequency to rank ratio}
+%% \pgfimage[width=\textwidth]{zipf-l}
+%% }
+
+%% \frame[<+->]{
+%%   \frametitle{Log frequency to log rank ratio}
+%% \pgfimage[width=\textwidth]{zipf-log}
+%% }
+
+\section{Implications of collocations}
+\subsection{Collocations in a window}
+\frame[<+->]{
+  \frametitle{Corpus analysis}
+				
+  \begin{itemize}
+    \item Multiword terminology\\
+      Multiterm Extract
+    \item One sense per collocation hypothesis\\
+      \textit{take kindly}
+    \item Queries for collocations:\\
+      \textit{strong} N.*
+    \item [] Right window of 3: \textit{to offer} N.*
+    \item Collocations for other languages\\
+      \textit{\textbf{den Vorteil} eines persönlichen Kontaktes über die Stimme	\textbf{bietet}.}\\
+      \textit{offer the advantage}
+  \end{itemize}
+}
+
+%contingency tables for parallel texts
+
+
+\subsection{Word sketches}
+\frame{ \frametitle{Automation through word sketches}
+\begin{itemize}
+    \item Word sketches in \url{http://the.sketchengine.co.uk/}
+    \item Fixed set of queries for Intellitext:\\
+      Modifiers: ADV .. V.*\\
+      Objects: V.* .. N.* or N.* \textit{to be} VVN
+    \item Sketches for other languages\\
+      \textit{bieten}
+\end{itemize}
+}
+
+\frame{
+  \frametitle{Basic points}
+				
+  \begin{itemize}
+    \item Collocations and collocates
+    \item Statistics for measuring surprise
+    \item Human judgment vs. computer model
+      \begin{block}{For the seminar}
+	Study collocation properties for words in your projects\\
+	Use their immediate left/right contexts and spans;\\
+	Try filtering collocates by their POS tags\\
+        Use word sketches
+      \end{block}
+  \end{itemize}
+}
+\end{document}
+
+

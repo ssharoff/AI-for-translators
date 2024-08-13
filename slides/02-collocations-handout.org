@@ -1,0 +1,24 @@
+#+TITLE: Collocations and word sketches for your words
+#+DATE: Serge Sharoff
+#+LATEX_HEADER: \usepackage{times}
+#+LATEX_HEADER: \usepackage{fancyhdr} 
+# +LATEX_HEADER: \usepackage{fullpage} 
+
+#+LATEX: \thispagestyle{fancy}
+# +LATEX: \rhead[]{University of Leeds, School of Languages, Cultures and Societies\\Centre for Translation Studies}
+#+LATEX: \lfoot[]{}
+#+LATEX: \cfoot[]{}
+
+* Task:  To research collocations and word sketches
+
+For some words of interest to study their collocation properties:
+  + Make collocation lists for their immediate left/right contexts and for spans of 2-3 words;
+  + Try filtering collocates by their POS tags;
+  + Use word sketches from the SketchEngine.
+
+Start with the words in your native language, as it'll make it easier to interpret the words. Try testing this with one word in each language before the Thursday class.
+
+The following interfaces can produce collocation lists:
+ + Aranea :: \url{http://aranea.juls.savba.sk}
+ + SketchEngine ::  Use the institutional login for Leeds when accessing from home\\
+   \url{http://app.sketchengine.eu/}

@@ -1,0 +1,139 @@
+#+TITLE: Concordances and frequency lists for your words
+#+DATE: Serge Sharoff
+#+LATEX_HEADER: \usepackage{times}
+#+LATEX_HEADER: \usepackage{fancyhdr} 
+# +LATEX_HEADER: \usepackage{fullpage} 
+
+#+LATEX: \thispagestyle{fancy}
+# +LATEX: \rhead[]{University of Leeds, School of Languages, Cultures and Societies\\Centre for Translation Studies}
+#+LATEX: \lfoot[]{}
+#+LATEX: \cfoot[]{}
+
+The purpose of this session is to give you a feel of several online
+interfaces. You are not expected to analyse the concordance lines at
+this stage. The *learning objective* is to gain confidence in navigating
+in each of the interfaces and in obtaining results for your queries.
+
+**** Interfaces
+     :PROPERTIES:
+     :CUSTOM_ID: interfaces
+     :END:
+
+The following interfaces will be introduced in this session:
+
+# 1. Leeds CQP interface: [[http://corpus.leeds.ac.uk/protected/]]
+# 2. Leeds IntelliText: [[http://corpus.leeds.ac.uk/it/]]
+3. SketchEngine (SE): [[https://app.sketchengine.eu/]] 
+4. Aranea: [[http://aranea.juls.savba.sk]]
+5. BYU interface: [[https://www.english-corpora.org/]]
+6. *Parallel:* Opus: [[http://opus.nlpl.eu/]]
+7. *Parallel:* Linguee: [[http://www.linguee.com/]]
+
+Keep them open in separate browser windows.
+
+**** Corpora
+
+The exercises today are for English. Please use the following corpora
+(available through some of the online interfaces):
+
+1. BNC, the British National Corpus (Leeds CQP, IntelliText, SE, BYU);
+2. ukWac, snapshot of =.uk= TLD (Leeds CQP, IntelliText, SE);
+3. Europarl (IntelliText, SE, Opus);
+4. a collection of parallel texts from Linguee
+
+**** Exercise 1: Simple queries
+     :PROPERTIES:
+     :CUSTOM_ID: exercise-1-simple-queries
+     :END:
+
+Select a corpus and make a *concordance* for:\\
+/ill-gotten/\\
+/gotten/\\
+/espouse/
+
+Find out the frequencies of such words in each of the corpora in each of
+the interfaces (if they provide this info).
+# In IntelliText check 'Show total number of matches' in the Concordance window.
+
+**** Exercise 2: Morphological information
+     :PROPERTIES:
+     :CUSTOM_ID: exercise-2-morphological-information
+     :END:
+
+Check if you understand the following terminology:
+
+A *paradigm* is a set of all possible *word forms*, which share the same
+lexical meaning but differ morphologically:
+
+- be :: /am, are, is, was, were, been, being;/
+- tall :: /taller; tallest/ (comparative adjective)
+- play :: /plays; played; playing/ (verb) or /play; plays/ (noun)
+
+A *lemma* (or a "*base form*") is a "canonical" "dictionary" form, in
+bold in these lists.
+
+*Part of Speech* (PoS) is the functional class of a word form in a
+sentence, usually expressed by a code (*noun*=NN; plural noun=NNS;
+adjective=JJ; base verb=VV; verb with the /ing/ ending=VVG).
+
+# To search for lemmas in *Leeds CQP* add %\\
+# in *IntelliText* use the Query builder button;\\
+in *SketchEngine/Aranea* choose the appropriate query field;\\
+in *Opus* replace the keyword =word= with the keyword =lem=.
+
+1. Take a look at the outputs of lemma vs word form queries for:\\
+   /go, get, impinge, tall/\\
+   *Note*: to find examples of relatively rare forms, e.g., /gotten/ or
+   /tallest/, you need to search for them separately.
+
+2. Find examples of:\\
+   /utter/ (VERB/ADJECTIVE)\\
+   /water/ (NOUN/VERB)\\
+   /waters/ (NOUN/VERB)
+
+The meanings of many words vary depending on their functional classes
+(PoS tags). The easiest option is with the Query builder in IntelliText.
+As for the other interfaces, we will explore the magic of regular
+expressions later.
+
+**** Exercise 3: Phrases and lexical patterns
+     :PROPERTIES:
+     :CUSTOM_ID: exercise-3-phrases-and-lexical-patterns
+     :END:
+
+Find differences in the frequencies of:\\
+/naughty little/ vs /little naughty/\\
+/as if it were/ vs. /as if it was/\\
+/translate into/ vs. /translate to/\\
+
+**** Exercise 4: Lexicogrammatical patterns
+     :PROPERTIES:
+     :CUSTOM_ID: exercise-4-lexicogrammatical-patterns
+     :END:
+
+Some verbs in English are followed by other verbs in the /ing/ form,
+while some are followed by verbs in the form with /to/. Detect which are
+which on the basis of corpus data:
+
+/arrange, mean, plan, refuse, manage, postpone/
+
+**** Exercise 5: Parallel corpora
+     :PROPERTIES:
+     :CUSTOM_ID: exercise-5-parallel-corpora
+     :END:
+
+Use EuroParl in IntelliText, SE, OPUS if you deal with an EU language
+(choose an appropriate language code under /Alignments/ in Opus; In
+IntelliText the parallel corpora are under the special rubric in the
+Language Selection menu). Use the UN corpus for Arabic, Chinese and
+Russian. For Japanese, use OpenSubtitles in the OPUS interface. Linguee
+offers large parallel corpora of unspecified origin.
+
+Investigate translations from English into your languages for identical
+words with different functional classes, e.g.\\
+/utter/ (VERB/ADJECTIVE)\\
+/water/ (NOUN/VERB)\\
+/waters/ (NOUN/VERB)
+
+In the OPUS interface use =lem= for lemmas and =tnt= for PoS (the names
+are listed under the positional annotation field).
