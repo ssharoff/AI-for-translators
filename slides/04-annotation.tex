@@ -1,0 +1,403 @@
+% for slides
+%% \documentclass{beamer}
+% for handout
+\documentclass[handout]{beamer}
+
+\usepackage{stdpresent}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{url}
+\renewcommand{\code}[1]{{\small \texttt{\red{#1}}}}
+%% \newcommand{\G}[1]{{\selectlanguage{german}#1}}
+%% \newcommand{\R}[1]{{\selectlanguage{russian}#1}}
+
+%\usepackage{times}
+
+\title{Linguistic annotation}
+\subtitle{Mark up, XML, DTD, TEI}
+
+\begin{document}
+
+\maketitlepage
+
+\section{Principles of annotation}
+\subsection{What is annotation?}
+
+\frame[<+->]{ \frametitle{}
+ \includegraphics[width=\textwidth]{jane-eyre} 
+}
+
+\frame[containsverbatim]{
+  \frametitle{Why annotation?}
+ 
+{\scriptsize
+      \begin{verbatim}
+                                           JANE EYRE 479
+                  CHAPTER XXXVII
+                    CONCLUSION.
+READER, I married him. A quiet wedding we had: he and 
+I, the parson and clerk, were alone present. When we got 
+back from church, I went into the kitchen of the manor-
+house, where Mary was cooking the dinner, and John clean-
+ing the knives, and I said : 
+   ``Mary, I have been married to Mr. Rochester this morn-
+ing.'' The housekeeper and her husband were both of that
+      \end{verbatim}
+}
+\begin{itemize}
+\item [] Any problems with OCR?
+%\item [] page numbers, running titles, hyphenation, quotations, long dash, paragraph and sentence boundaries
+\end{itemize}
+
+}
+
+\frame[<+->]{
+  \frametitle{What is annotation?}
+
+  \begin{itemize}
+    \item Data vs. interpretation
+    \item Markup contributes towards explicit interpretation of a text
+    \item Early examples of markup: alphabet, punctuation, typographic setup
+    \item Different annotations for different interpretations:\\
+Chomsky set out his theory in \textit{Syntactic Structures} (1957)
+    \item [$\to$]
+\texttt{\tiny
+Chomsky set out his theory in <i>Syntactic Structures</i> (1957)\\
+Chomsky set out his theory in~<cite type="title$"$ ref="Chomsky1957"/>
+}
+  \end{itemize}
+}
+
+\subsection{XML: eXtensible Markup Language}
+
+\frame[containsverbatim]{
+  \frametitle{XML: example of code}
+ 
+{\scriptsize
+
+      \begin{verbatim}
+<pb n="479"/> 
+<div1 type="chapter"   n="38"> 
+<h>Conclusion .</h>
+<p><s>Reader , I married him .</s> 
+<s>A quiet wedding we had : he and I , the parson and clerk , 
+were alone present . </s> 
+<s>When we got back from church , I went into the kitchen of 
+the manor-house , where Mary was cooking the dinner , and John 
+cleaning the knives, and I said : </s></p> 
+<p><q><s> Mary, I have been married to Mr. Rochester this morning . </s> </q> 
+...
+</p>
+      \end{verbatim}
+}
+}
+
+\frame[<+->]{
+  \frametitle{Markup languages}
+  \begin{itemize}
+    \item XML: eXtensible Markup Language (1999)\\
+      Representing the logical structure of data
+    \item XSL(T)= style sheet and transformation language
+    \item HTML: HyperText Markup Language\\a relative of XML, xHTML
+    \item TMX: Translation Memory eXchange format
+    \item TBX: TermBase eXchange format
+    \item SRX: Segmentation Rules eXchange format
+    \item XML for dictionary entries
+  \end{itemize}
+}
+
+\frame[<+->]{
+  \frametitle{XML basics}
+  \begin{itemize}
+    \item tags, words in angular brackets: \code{<p> <div1>}
+    \item elements, the content within a tag
+    \item attributes and values: \code{<div1 type="chapter$"$ n="38$"$>}
+    \item empty elements: \code{<pb n="474"/> }
+    \item entities: \code{\&mdash;} (---), \code{\&amp;} (\&), \code{\&auml;} (\"a)
+    \item DTD (Document Type Definition) --- \\definition of all the elements, attributes and entities
+  \end{itemize}
+}
+
+\frame[<+->]{
+  \frametitle{Well-formed XML document}
+  \begin{itemize}
+    \item every tag which is opened has to be closed
+    \item [*] \code{<p> text <p> new paragraph}
+    \item The only exception is for empty elements:\\ \code{<pb n="474"/> } $\mapsto$ \code{<pb n="474"></pb> }
+    \item tags are properly embedded:
+    \item [*] \code{<p> <q> quote </p></q>}
+    \item Tags are case-sensitive:\\ \code{<publicationStmt> <gramGrp> }
+  \end{itemize}
+}
+
+%% \frame{
+%%   \frametitle{A dictionary entry}
+%% {\scriptsize
+%% \textbf{frustrate}
+%% \begin{enumerate}
+%%   \item VB:  frustrate   frustrates   frustrating   frustrated\\
+%%   If something \textbf{frustrates} you, it upsets or angers you because you are unable to do anything about the problems it creates.\\
+%%   \textit{These questions frustrated me.}\\
+%%   \textit{Doesn't it frustrate you that audiences in the theatre are so restricted?}\\
+%%    N-VAR  frustration   frustrations  \\
+%%   \textit{The results show the level of frustration among hospital doctors.
+%%   ...a man fed up with the frustrations of everyday life.}
+%% \item   VB: frustrate   frustrates   frustrating   frustrated  
+%%   If someone or something \textbf{frustrates} a plan or attempt to do something, they prevent it from succeeding.\\
+%%   \textit{The government has deliberately frustrated his efforts to gain work permits for his foreign staff.\\
+%%   ...her frustrated attempt to become governor.}
+%% \end{enumerate}
+%% }
+%% }
+
+\section{Linguistic annotation}
+
+%% \frame[<+->]{
+%%   \frametitle{Seven maxims (Leech, 1993)}
+%%   \begin{enumerate}
+%%     \item Possibility to remove annotations:
+%%     \item [] Clair\_NP collects\_VVZ shoes\_NNS vs. 
+%%     \\\code{<w pos="VVZ">collects</w>} vs.
+%%     \\g/oing
+%%     \item Possibility to extract annotations
+%%     \item Guidelines available to the corpus user
+%%     \item Clear methodology of annotation
+%%     \item Annotation is interpretation
+%%     \item Theory-neutral principles
+%%     \item No annotation scheme has the right to be a standard vs. interoperability
+
+%%   \end{enumerate}
+%% }
+
+\subsection{Formats of annotation}
+
+\frame[containsverbatim]{
+  \frametitle{Formats of annotation}
+  \begin{itemize}
+    \item Tab-separated format\\
+{\scriptsize
+      \begin{verbatim}
+	N12:0510    VVD    studied    study    [Coord.N12:0504]
+      \end{verbatim}
+}
+    \item COCOA: \code{<w VVD>studied}
+    \item XML:
+{\scriptsize
+      \begin{verbatim}
+	<s n="12">
+        ...
+	<w id="N12:0510">studied
+	<ana lemma="study" pos="VVD" />
+	</w>
+	</s>
+      \end{verbatim}
+}
+  \end{itemize}
+}
+
+
+\subsection{Types of annotation}
+
+\frame[<+->]{
+  \frametitle{Types of annotation}
+  \begin{itemize}
+    \item Metatext annotation (author, audience, domain, genre)
+    \item Text annotation (quotes, comments, page breaks)
+    \item Typographic annotation (fonts, headings, text alignment)
+    \item Linguistic annotation:
+    \item [] Part-of-speech (POS): \code{<w pos="VVZ$"$>studies</w>}
+    \item [] Lemmatisation: \code{He <w lemma="leave$"$>left</w>}
+%%     \item [] Syntactic structure: Suzanne or PennTreeBank\\
+%% \code{\scriptsize
+%% 	N12:0510    VVDv    studied    study    [Vd.Vd]
+%% }
+    \item [] Functional relationships, e.g., coreference:\\\code{<w ref="X1" lemma="he$"$>He</w>}
+    \item [] Word senses: power$_1\to$énergie, power$_2\to$pouvoir
+      \setlength{\tabcolsep}{2pt}
+    \item [] \begin{tabular}{lllllll}
+The owner & of & the company & has & the power & to fire & any workers\\
+Le propriétaire & de & la société & a & le pouvoir & de licencier & les travailleurs
+      \end{tabular}
+  \end{itemize}
+}
+
+\frame[<+->]{ \frametitle{Other kinds of annotation}
+\begin{itemize}
+  \item Named Entities\\
+Mark boundaries of names of type PERson, ORGanization, GPE, LOCation,\ldots
+\item [] \code{<enamex type="ORGANIZATION$"$>}FBI\code{</enamex>} agents arrested \code{<enamex type="PERSON$"$>}Kaczynski\code{</enamex>} on \code{<enamex type="DATE$"$>}April 3, 1996\code{</enamex>}, at his remote cabin outside \code{<enamex type="LOCATION$"$>}Lincoln\code{</enamex>}
+\item Gazetteers, normalisers, disambiguation
+\item []
+  \textit{Lech~Kaczynski} vs  \textit{Jaroslaw Kaczynski} vs \textit{Ted~Kaczynski}
+  \textit{Lincoln, US} vs  \textit{Lincoln, UK} 
+\item Terminology annotation: Identify terms, detect their canonical form and link to their database records
+\item []
+  \code{<te id=$"$1123$"$>}Fast Breeder Reactors\code{</te>} (\code{<te id=$"$1123$"$ type=$"$abbr$"$>}FBR\code{</te>}) can produce more \code{<te id=$"$1134$"$>} fissile fuel\code{</te>} than \code{<te id=$"$1123$"$ type=$"$ana$"$>} they\code{</te>} consume.
+\end{itemize}
+}
+
+\frame[<+->]{
+  \frametitle{Standards of annotation}
+  \begin{itemize}
+    \item TEI (Text Encoding Initiative), TEI-Lite (a subset) --- for text and metatext annotation
+    \item EAGLES (European Advisory Group on Language Engineering Standards) --- for linguistic annotation
+    \item \textit{The man still saw her}
+    \item [] The ($AT$) man ($NN|VV$) still ($NN|VV|RB$) saw ($NN|VVD$) her ($PP|PP\$$) . ($SENT|PUN$)
+    \item Rules vs statistical training
+    \item Statistical hidden Markov model: $p(t_i|w_i)\times p(t_i|t_{i-1})$
+    \item [] \begin{tabular}{lll}
+$p(PP|her)=0.3;$ & $p(PP|SENT)=0.0022;$ & 	=0.000654\\
+$p(PP\$|her)=0.7;$ & $p(PP\$|SENT)=0.000019$ &	=0.000013
+      \end{tabular}
+  \end{itemize}
+}
+
+\frame[<+->]{
+  \frametitle{POS tags}
+  \begin{itemize}
+    \item The standard inventory for English (the Penn set):\\
+	VV -- base verb, VVD -- past tense, VVN -- pp (taken)\\
+	NN -- common noun, singular; NNS -- common noun, plural;\\
+	CS -- conjunction, subordinative, \textit{so that}: so\_CS21 that\_CS22
+      \item [] Penn set: 55 tags; Lancaster set: 146 tags
+      \item Specific sets for languages and taggers:\\
+	German STTS: VVFIN -- finite verb, VVINF -- infinitive,
+	VVIZU -- infinitive with ``zu'', \\NN -- common noun (50 tags)
+      \item [] Japanese mecab tagset: 16 tags 
+      \item [] Russian tagset: 1066 tags
+      \item [] $Ncmsan:$ Noun, Type = common, Gender = masculine,
+Number = singular, Case = accusative, Animate = no
+
+  \end{itemize}
+}
+
+\frame[<+->]{
+  \frametitle{Accuracy of tagging}
+  \begin{itemize}
+    \item Accuracy -- the percentage of words (i.e. word tokens) which are correctly tagged
+    %% \item Recall is the extent to which all correct annotations are found in the output of the tagger.
+    %% \item Precision is the extent to which incorrect annotations are rejected from the output.
+    \item [] 95\% accuracy: one in 20 is wrong
+    \item [] 96\% accuracy: one in 25 is wrong
+    \item [] an improvement of 25\% from 95\% to 96\% ???
+    \item Domain and genre influence:\\
+      newspapers for training (Wall Street Journal in Penn Treebank)
+  \end{itemize}
+}
+
+\frame[<+->]{ \frametitle{Types of errors}
+\begin{itemize}
+  \item \textit{I can light a fire. You can open a can.}
+  \item [$\to$] PP VV NN DT NN. PP VV VV DT VV.
+  \item [] \includegraphics[width=0.7\textwidth]{precision-recall} 
+  \item Precision = TP/(TP+ FP) vs \\Recall = TP/(TP + FN)
+%% https://towardsdatascience.com/model-evaluation-i-precision-and-recall-166ddb257c7b
+\end{itemize}
+}
+
+\frame[<+->]{ \frametitle{Text level annotation}
+\begin{itemize}
+  \item Linguistic features which can be counted
+  \item [] Lexical features:\\
+$publicVerbs = acknowledge, admit, agree, assert, claim...$\\
+%% $timeAdverbials = afterwards, again, earlier, early, ...$\\
+$amplifiers = absolutely, altogether, completely, enormously,...$
+  \item []
+    Part-of-speech features:\\
+Nominalisations (nouns ending in $-tion, -ness, -ment$)\\
+main POS tags\\
+Past tense verbs (VVD)
+\item []
+  Syntactic features:\\
+$that$ deletions\\
+pied piping (\textit{Which house did she buy ...?})
+\item []
+  Text-level features, such as:\\
+Average word length\\
+Average sentence length
+  \item Factor analysis: which features group with each other
+  %% \item [$\to$] Text dimensions: informational, narrativity, situation-dependent, etc
+\end{itemize}
+}
+\frame[<+->]{ \frametitle{Multi-dimensional analysis (Biber, 1988)}
+ \includegraphics[height=0.8\textheight, width=0.8\textwidth]{biber-dim1-3} 
+}
+\frame[<+->]{ \frametitle{Multi-dimensional analysis (Biber, 1988)}
+  \begin{tabular}{lll}
+Functions 	& Linguistic features 	& Characteristic genres\\\hline\hline
+Dimension 1\\\hline
+Monologue 	& nouns, adjectives	& informational exposition\\
+Careful production & prepositional phrases &e.g., official documents\\
+Faceless	& long words		& academic prose\\\hline
+Interactive	& 1$^{st}$ and 2$^{nd}$ PPs 	& conversations\\
+Personal focus	& questions, reductions & (public and private)\\
+Involved	& stance verbs, hedges\\
+Online production& emphatics\\\hline\hline
+\pause
+Dimension 3\\\hline
+Elaborated	& wh-relative clauses 	& official documents\\
+		& pied-piping  		& professional letters\\
+		& phrasal coordination 	& (exposition) \\\hline
+Situation-  	& time and place 	& broadcasts\\
+dependent 	& \hspace{2em} adverbials & (fiction)\\
+
+  \end{tabular}
+}
+
+%% \frame[containsverbatim,<+->]{
+%%   \frametitle{Annotations for syntactic parsing}
+ 
+%% {\scriptsize
+%%       \begin{verbatim}
+%% <cl type='finite declarative' function='independent'>
+%%   <phr type='NP' function='subject'>Nineteen fifty-four,
+%%     <cl type='finite relative declarative' function='appositive'>when
+%%       <phr type='NP' function='subject'>I</phr>
+%%       <phr type='VP' function='predicate'>was eighteen
+%%                     years old</phr>
+%%     </cl>,
+%%   </phr>...
+%% </cl>
+%%       \end{verbatim}
+%% }
+
+%% }
+
+%% \frame[containsverbatim,<+->]{
+%%   \frametitle{Representing alignment}
+ 
+%% {\scriptsize
+%% %      \begin{verbatim}
+%%   \begin{block}{A sentence from \textit{Alice in Wonderland}}
+%%     \begin{itemize}
+%%       \item [] There was nothing so VERY remarkable in that; nor did Alice think it so VERY much out of the way to hear the Rabbit say to itself `Oh dear! Oh dear! I shall be late! 
+%%       \item [] Dies war grade nicht sehr merkwürdig; Alice fand es auch nicht sehr außerordentlich, daß sie das Kaninchen sagen hörte: ``O weh, o weh! Ich werde zu spät kommen!"
+%%       \item [] \R{    Конечно, ничего удивительного в этом не было. Правда, Кролик на бегу говорил: --- Ах, боже мой! Я опаздываю. Но и это не показалось Алисе особенно странным.} 
+%%     \end{itemize}
+%%   \end{block}
+%% %      \end{verbatim}
+%% }
+%% \begin{itemize}
+%% \item Text / paragraph / sentence / word-level alignment
+%% \item Existing parallel corpora:\\
+%% Europarl, Hansards, Open Office
+%% \end{itemize}
+
+%% }
+
+\frame{
+  \frametitle{Basic points}
+  \begin{itemize}
+    \item Raw texts vs. annotated texts
+    %% \item Leech's maxims for text annotation
+    \item Annotation formats and standards: XML, TEI, EAGLES
+    \item Metatextual annotation
+    \item POS tagging
+    \item Higher-level annotation
+      \begin{block}{For the next seminar}
+	Prepare for a short presentation of the most exciting findings in your projects to discuss them with another student in the group
+      \end{block}
+  \end{itemize}
+}
+
+\end{document}
