@@ -106,29 +106,29 @@ cleaning the knives, and I said : </s></p>
   \end{itemize}
 }
 
-\frame[<+->]{
-  \frametitle{XML basics}
-  \begin{itemize}
-    \item tags, words in angular brackets: \code{<p> <div1>}
-    \item elements, the content within a tag
-    \item attributes and values: \code{<div1 type="chapter$"$ n="38$"$>}
-    \item empty elements: \code{<pb n="474"/> }
-    \item entities: \code{\&mdash;} (---), \code{\&amp;} (\&), \code{\&auml;} (\"a)
-    \item DTD (Document Type Definition) --- \\definition of all the elements, attributes and entities
-  \end{itemize}
-}
+%% \frame[<+->]{
+%%   \frametitle{XML basics}
+%%   \begin{itemize}
+%%     \item tags, words in angular brackets: \code{<p> <div1>}
+%%     \item elements, the content within a tag
+%%     \item attributes and values: \code{<div1 type="chapter$"$ n="38$"$>}
+%%     \item empty elements: \code{<pb n="474"/> }
+%%     \item entities: \code{\&mdash;} (---), \code{\&amp;} (\&), \code{\&auml;} (\"a)
+%%     \item DTD (Document Type Definition) --- \\definition of all the elements, attributes and entities
+%%   \end{itemize}
+%% }
 
-\frame[<+->]{
-  \frametitle{Well-formed XML document}
-  \begin{itemize}
-    \item every tag which is opened has to be closed
-    \item [*] \code{<p> text <p> new paragraph}
-    \item The only exception is for empty elements:\\ \code{<pb n="474"/> } $\mapsto$ \code{<pb n="474"></pb> }
-    \item tags are properly embedded:
-    \item [*] \code{<p> <q> quote </p></q>}
-    \item Tags are case-sensitive:\\ \code{<publicationStmt> <gramGrp> }
-  \end{itemize}
-}
+%% \frame[<+->]{
+%%   \frametitle{Well-formed XML document}
+%%   \begin{itemize}
+%%     \item every tag which is opened has to be closed
+%%     \item [*] \code{<p> text <p> new paragraph}
+%%     \item The only exception is for empty elements:\\ \code{<pb n="474"/> } $\mapsto$ \code{<pb n="474"></pb> }
+%%     \item tags are properly embedded:
+%%     \item [*] \code{<p> <q> quote </p></q>}
+%%     \item Tags are case-sensitive:\\ \code{<publicationStmt> <gramGrp> }
+%%   \end{itemize}
+%% }
 
 %% \frame{
 %%   \frametitle{A dictionary entry}
@@ -288,9 +288,9 @@ Number = singular, Case = accusative, Animate = no
 \frame[<+->]{ \frametitle{Types of errors}
 \begin{itemize}
   \item \textit{I can light a fire. You can open a can.}
-  \item [$\to$] PP VV NN DT NN. PP VV VV DT VV.
+  \item [$\to$] PP VV \alert{NN} DT NN. PP VV VV DT \alert{VV}.
   \item [] \includegraphics[width=0.7\textwidth]{precision-recall} 
-  \item Precision = TP/(TP+ FP) vs \\Recall = TP/(TP + FN)
+  \item $$Precision = \frac{TP}{TP+ FP} Recall = \frac{TP}{TP + FN}$$
 %% https://towardsdatascience.com/model-evaluation-i-precision-and-recall-166ddb257c7b
 \end{itemize}
 }
@@ -393,10 +393,12 @@ dependent 	& \hspace{2em} adverbials & (fiction)\\
     \item Annotation formats and standards: XML, TEI, EAGLES
     \item Metatextual annotation
     \item POS tagging
-    \item Higher-level annotation
-      \begin{block}{For the next seminar}
-	Prepare for a short presentation of the most exciting findings in your projects to discuss them with another student in the group
-      \end{block}
+    \item Higher-level annotation: meaning
+    \item Quality of annotation: Precision vs Recall\\
+          Type 1 erors: FP; Type 2 errors: FN
+      %% \begin{block}{For the next seminar}
+      %%   Prepare for a short presentation of the most exciting findings in your projects to discuss them with another student in the group
+      %% \end{block}
   \end{itemize}
 }
 
