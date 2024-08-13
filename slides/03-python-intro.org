@@ -301,13 +301,17 @@ favorite_color == blue
     ~print(len(url_list))~\\
     ~for url in url_list:~\\
     \hspace{1em} ~print(f"We are processing: {url}")~
+  + Note the possibility to include variables into strings:\\
+    ~print("We are processing: {url}")~
   + ~assert~ stops execution if something is not right\\
     ~assert len(url_list)>0, "Empty url list"~
 
 *** AI frameworks
-  + Various AI frameworks can help you with writing code:\\
+  + Various AI models can help you with writing code:\\
     Ask ChatGPT, Claude, Copilot, Google Colab etc to:\\
     /Write a function which gets an HTML file as its parameter and used the Trafilatura library to extract its text content./
+  + Use the right prompts: be as specific as possible 
   + Understanding their output and *your* ability to modify it
-  + Be and commentaries
+  + Be inquisitive and ask AI models why a specific line behaves in this way
+  + Be liberal with your own commentaries: literate programming
 

@@ -1,5 +1,5 @@
 #+TITLE: Collocations and word sketches for your words
-#+DATE: Serge Sharoff
+#+DATE: 
 #+LATEX_HEADER: \usepackage{times}
 #+LATEX_HEADER: \usepackage{fancyhdr} 
 # +LATEX_HEADER: \usepackage{fullpage} 

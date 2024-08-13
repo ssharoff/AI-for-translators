@@ -1,5 +1,5 @@
 #+TITLE: Introduction to Python
-#+AUTHOR: MODL5007
+# +AUTHOR: MODL5007
 #+DATE: Introduction to Corpus Linguistics for Translators
 #+LATEX_HEADER: \usepackage{times}
 #+LATEX_HEADER: \usepackage{fancyhdr}
