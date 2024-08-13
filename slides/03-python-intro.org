@@ -1,0 +1,313 @@
+#+TITLE: Python for linguists
+#+DATE: 
+#+LaTeX_CLASS: beamer
+# +LaTeX_CLASS_OPTIONS: [handout]
+#+LATEX_HEADER: \usepackage{stdpresent}
+#+LATEX_HEADER: \usepackage{apalike}
+#+BEAMER_THEME: Frankfurt
+#+OPTIONS: H:3 toc:nil
+
+* Introduction
+
+** Computational thinking
+*** Computational thinking
+    + How to think like a computer scientist\\
+      https://openbookproject.net/thinkcs/
+      + Precision in formulating descriptions
+      + Problem solving
+**** Our tasks in learning 
+#+ATTR_BEAMER: :overlay <+->
+     + Introduction into basic concepts
+     + Python for corpus collection
+     + Text annotation: genres and emotions
+     + Keyword analysis for your projects
+** Basic terms
+*** Basic terms
+#+ATTR_BEAMER: :overlay <+->
+ + A program :: /a sequence of precise instructions that enables a computer to perform a specific task/
+ + Bugs :: /programming errors/
+ + Debugging :: /finding and fixing programming errors/
+ + Syntactic errors :: /when the syntax of the code is incorrect/ \\
+   e.g. “1+"two"” is not legal\\
+   \includegraphics[width=0.8\textwidth]{syntaxerror.png}
+ + Semantic errors :: /the program does not do what you want it to do/
+*** Basic concepts
+#+ATTR_BEAMER: :overlay <+->
+ + Data type :: A class of data:
+   + integers, floating points, strings, lists, dictionaries and *objects*
+   + Each data type defines operations that can (and thereby cannot) be done on the data
+ + Variable :: a storage location (a variable name and data)
+ + Function :: A piece of code that can be re-used
+ + Method :: A function that is associated with an object
+ + Class :: a template of a variable:
+   + defines how variables, functions, and methods work together and what we can do with them
+** Python
+*** Python
+#+ATTR_BEAMER: :overlay <+->
+ + First released in 1991 by Guido van Rossum
+ + Current version: we will use version 3.9
+ + Name based on the British comedy group Monty Python
+ + Easily readable syntax:\\
+   ~for key in dictionary:~\\
+     \hspace{2em} ~print(key,dictionary[key])~
+ + Block of code is grouped by indentation
+ + Python scripts \to files which can be executed by the interpreter
+ + Python notebooks \to scripts with a record of interaction
+ + File extensions \to .py (for scripts), .ipynb (for notebooks)
+ + Google Colab for the notebook interface
+
+*** Hello world
+#+BEGIN_SRC python
+s = "Hello world"
+print(s)
+print(s.upper())
+print(s.split())
+print(s.split("l"))
+#+END_SRC
+
+  + Variable :: s
+  + Type :: string
+  + Operator :: = (assignment)
+  + Function :: print()
+  + Methods :: upper(), split(), find(), startswith()...
+#+ATTR_BEAMER: :overlay <+->
+  + Now open an empty notebook in Google Colab, type the commands at the top as cells and execute them
+     
+* First real Python program
+** Word frequency distribution
+#+BEGIN_SRC ditaa :file word-counting.png
+      +------+
+      | FILE |        
+      |  {d} |        
+      +------+
+	 |
+	 v
+    +-----------+
+    | read file |        
+    +-----------+
+	 |
+	 v
+  +------------------+    +--------------+
+  | get sentence {io}|--->| sentence {o} |
+  +------------------+    +--------------+   
+				 |
+				 v        
+			  +--------------+   +----------+
+			  | get word {io}|-->| word {o} |
+			  +--------------+   +----------+
+						 |         
+						 v        
+   +------------+                         +---------------+
+   | counts {o} |<------------------------| record counts |
+   +------------+                         +---------------+
+	 |
+	 v
+  +---------------------+     +-------------------+
+  | display counts {io} |---->| (word, count) {o} |
+  +---------------------+     +-------------------+
+				       |	  
+				       v        
+				+------------+    +------------------+
+				| good?? {c} |--->| print(word, ipm) |	
+				+------------+    +------------------+
+
+#+END_SRC
+
+#+RESULTS:
+[[file:word-counting.png]]
+
+*** Word frequency distribution
+#+BEGIN_SRC python
+  import re
+  text = requests.get("http://corpus.leeds.ac.uk/teaching/modl5007/parrot.txt").text
+  text = text.lower()
+  corpus_count = 0
+  dictionary = {}
+  for sentence in text.split(". "):
+    for word in sentence.split(" "):
+      corpus_count += 1
+      word = re.sub("[^a-z-]+","",word)
+      if word in dictionary: dictionary[word] += 1
+      else: dictionary[word] = 1
+  for word in dictionary:
+    ipm = dictionary[word] / ( corpus_count / 1000000 )
+    if ipm > 1000:
+      print(word, ipm)
+#+END_SRC
+
+* Syntax of Python
+** Syntactic conventions
+*** Data types
+#+ATTR_BEAMER: :overlay <+->
+  + Integer: i = 42
+  + Float: pi = 3.14
+  + String: s = "My hovercraft is full of eels"
+  + Difference between number and string:\\
+    "3.14" \ne 3.14
+  + Testing: s.startswith("My")
+  + Searching: s.find("eels") \to 25
+  + Slicing from the start: s[:2] \to "My"
+  + Slicing to the end: s[25:] \to "eels"
+  + Zero indexing: s[0] \to "M"; s[1] \to "y"\\
+    Like house floor counting: first floor
+*** Basic operators
+#+ATTR_BEAMER: :overlay <+->
+  + Arithmetic operators: 2+2; 5-2; 7*3; 5/2\\
+    Also for strings "Hello "+"world"
+  + Assignment operators: ~a = 2; b = 2~\\
+    ~a = b +2~\\
+    ~a += 2~
+  + Comparison operators: ~a>2~\\
+    ~(b>=2 and 7*3==21)~\\
+    ~not 5/2==2;  int(5/2)==2~ 
+  + Membership operator: ~a in [5, 6, 7]~
+*** Variables
+  + Legal naming conventions:
+    standard characters, numbers (not at the start) and underscores
+  + Names need to be informative to reflect the logic of your script
+  + Variable names are case-sensitive:\\
+#+BEGIN_SRC python
+    CamelCase
+    Title_Case
+    snake_case
+#+END_SRC 
+  + Q :: What is the difference between:
+#+begin_src python
+favorite_color = "blue"
+favorite_color == "blue"
+favorite_color = blue
+favorite_color == blue
+#+end_src
+
+*** Functions
+#+ATTR_BEAMER: :overlay <+->
+  + A function is a sequence of statements that performs a task:\\
+    $\sin(\pi/2)$ or ~print(word, ipm)~
+  + It takes zero or more arguments as input
+  + It returns zero or more arguments as output
+  + Functions can be:
+    + built-in: defined in the python standard\\
+      ~print(), int(), str(), len(), open()~
+    + user-defined\\
+      ~def compute_keywords(your_corpus, reference..):~ \\
+      ~do something~\\
+      ~return result~
+    + imported from libraries:\\
+       ~import LibraryName~
+** Control structures and functions
+
+*** Control structures and functions
+    \small
+#+ATTR_BEAMER: :overlay <+->
+  + Find the minimum of two numbers:\\
+    25 or 7?
+  + Expressing a condition:
+    #+begin_src python
+      if a<b:
+	  then a
+	  else b
+    #+end_src
+  + Writing a function:
+    #+begin_src python
+    def min(a, b):
+      if a < b:
+	  return a
+      else:
+	  return b
+    #+end_src
+  + Find the minimum of three numbers:\\
+    12 or 7 or 25?
+
+*** Minimum of three numbers
+    \small
+#+ATTR_BEAMER: :overlay <+->
+  + Expanding the case of two numbers:\\
+    #+begin_src python
+    def min3(a, b, c):
+    if a < b:
+        if a < c:
+            return a
+        else:
+            return c
+    else:
+        if b < c:
+            return b
+        else:
+            return c
+    #+end_src
+  + A more elegant way:\\
+    #+begin_src python
+    def min3(a, b, c):
+    if a < b:
+        return min(a,c)
+    else
+        return min(b,c)
+    #+end_src
+  + Write min4(a,b,c,d) in Colab
+
+
+*** Import statement
+#+ATTR_BEAMER: :overlay <+->
+  + Importing a module for the current script\\
+    For example for regular expressions:\\
+    #+begin_src 
+    import re
+    re.findall(regex, string)
+    re.findall(".[aeiou]","Monty Python") \to "Mo","ho"
+    re.sub("[^a-z-]+","","Monty Python") \to "MontyPython"
+    #+end_src
+  + Trafilatura for web scraping:\\
+    #+begin_src 
+    import trafilatura
+    from trafilatura.spider import focused_crawler
+    url_list=focused_crawler(start_url, max_seen_urls=10,
+         max_known_urls=50)
+    #+end_src
+
+*** Lists
+#+ATTR_BEAMER: :overlay <+->
+  + A list is a sequence of objects:\\
+     a = ["Once", "upon", "a", "time"]\\
+     a = "Monty Python".split()
+  + An empty list\\
+    emptyList = []
+  + Order of items is important: \\
+     ["Monty", "Python"] \ne ["Python", "Monty"]
+  + Values can be repeated: ["Monty", "Monty", "Python"] 
+  + Zero indexing: a[0] \to "Monty", a[1] \to "Python"
+  + last element: a[-1]\\
+    "My hovercraft is full of eels".split()[-1] \to "eels"
+  + Same slicing as with strings: a[:2]
+*** Dictionary objects
+#+ATTR_BEAMER: :overlay <+->
+  + A dictionary is a collection of key-value pairs \to not a sequence
+  + Written in curly brackets: d = {"parrot": 8, "the": 30}\\
+    {"string": integer}
+  + Each key appears only once in a dictionary 
+  + Access via a key: d["parrot"] \to 8
+  + Test on membership: "parrot" in d
+  + ~for key in d:~\\
+    \hspace{1em} ~d[key]~
+  + ~for key in d:~\\
+    \hspace{1em} ~ipm[key] = d[key] / ( CorpusSize / 1000000)~
+  # + sorted(d.items(), key=lambda item: -item[1]) \to\\
+  #   {"the": 30, "parrot": 8}
+* Advanced suggestions
+** Debugging
+*** Debugging
+#+ATTR_BEAMER: :overlay <+->
+  + Programmes often do not behave as expected \to *debugging*
+  + Use ~print~ more often.\\
+    ~print(len(url_list))~\\
+    ~for url in url_list:~\\
+    \hspace{1em} ~print(f"We are processing: {url}")~
+  + ~assert~ stops execution if something is not right\\
+    ~assert len(url_list)>0, "Empty url list"~
+
+*** AI frameworks
+  + Various AI frameworks can help you with writing code:\\
+    Ask ChatGPT, Claude, Copilot, Google Colab etc to:\\
+    /Write a function which gets an HTML file as its parameter and used the Trafilatura library to extract its text content./
+  + Understanding their output and *your* ability to modify it
+  + Be and commentaries
+

@@ -1,0 +1,107 @@
+#+TITLE: Introduction to Python: Part II
+#+AUTHOR: MODL5007
+#+DATE: Introduction to Corpus Linguistics for Translators
+#+LATEX_HEADER: \usepackage{times}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \usepackage{fullpage}
+#+LATEX_HEADER: \usepackage{todonotes}
+#+LATEX_HEADER: \setlength{\marginparwidth}{1.5cm}
+#+LATEX_HEADER: \newcommand{\td}[2][ss]{\todo[color=yellow]{\scriptsize #2 #1\par}}
+#+LATEX_HEADER: \usepackage{paralist}
+#+LaTeX_HEADER: \let\itemize\compactitem
+#+LaTeX_HEADER: \let\enumerate\compactenum
+
+
+#+LATEX: \thispagestyle{fancy}
+#+LATEX: \rhead[]{University of Leeds, School of Languages, Cultures and Societies\\Centre for Translation Studies}
+#+LATEX: \lfoot[]{}
+#+LATEX: \cfoot[]{}
+
+* Objectives
+
+At the end of these classes, you should be able to:
+
+- Improve your understanding of python scripts
+- Improve your skills in debugging
+- Start your own corpus collection from the Web
+- Classify texts automatically using existing models
+- Investigate keywords for subcorpora in your collection 
+
+* Improving your python scripts
+
+** Explore ways for counting words
+1. Given a word in a string variable, for example, ~s='hovercraft'~ create a function for counting the number of syllables there.
+2. Given a sentence in a string variable, for example, ~s='My hovercraft is full of eels'~ use your function to count the number of syllables in each word.
+3. Read a file, for example, /parrot.txt/ to count the number of syllables in every word there.
+4. In this file:
+   - Find all words with no vowels,
+   - Find the word with the largest number of syllables.
+
+* Process web pages
+** Installation of additional modules
+   Run: ~!pip install trafilatura~
+
+   This should install the trafilatura module for processing web pages.  When you need any extra module, you can install it in this way by replacing ~trafilatura~ with the name of that module.
+** Collecting web pages from a list
+ 1. Start with the notebook /corpus-collect-list.ipynb/ and expand it with a list of other relevant pages from Wikipedia.
+ 2. Make sure it has access to your Google Drive (running Cell 3 will request this connection).
+ 4. How can you save your results for each run to a different folder? Possibly to a different subfolder for each language?
+** Crawlling a website
+ 1. Use the notebook /corpus-collect-crawl.ipynb/
+ 1. Apply it to a website you have identified as highly relevant to your specialised corpus domain. There is a variable to control this.
+ 3. Test it first to make sure it collects reasonable files (you can stop it once it's started).
+ 5. What happens with scraping from different websites? Please check the description of Javascript and the role it plays in rendering websites.
+
+* Text processing
+** Extract linguistic features
+ 1. Read a text from your corpus (by modifying the filename in /linguistic.ipynb/) and determine:
+    + its genre using the model ~ssharoff/genres~ (check the skeleton for calling this model); this follows the labels from our class on genres;
+    + its mood using ~bhadresh-savani/distilbert-base-uncased-emotion~; you might need to collect less formal texts first to have more diverse mood distribution; keep your file structure separate for each corpus
+ 2. Repeat the same task by processing a text in a different language.
+ 3. Modify /linguistic.ipynb/ to run this processing to annotate *all* files in your corpus. (Keep in mind that you have files for two languages).  If your filenames follow a pattern with numbers, check the python documentation for ~range()~ to generate a list of numbers.  See also the example of how names are generated in a loop in /corpus-collect.ipynb/.  Otherwise, you can run your for-loop through an explicit list of filenames.
+ 4. What is the statistics of each genre or emotion label? Can you create a dictionary of the more common names in each category?
+ 5. What happens if you work with a language other than English?  Are the classifiers still accurate?  You can explore more models at https://huggingface.co/models (focus on Token classification and Text classification models)
+
+    # + its named entities
+
+* Keyword analysis
+ 1. Save the predictions of the emotion classifier to separate your files into those with positive and negative emotions.
+ 2. Make separate frequency lists for positive and negative emotions. Do the words for your projects occur in those files?
+ 3. Compare the keywords for the respective frequency lists. As a template for this task use /word-keyness.ipynb/.
+
+* Debugging
+You can feel frustration when a python script does not work as intended. This is common experience with many tools including python. They do not always follow your expectations, but they can process many more things, so that you can devote your time to something more interesting. Find ways to adapt.  In particular:
+  1. Syntactic errors are mostly well explained, but if not, google the error messages.
+  2. Split your script into compact meaningful cells and run them one by one.
+  3. Use ~print()~ with relevant information to detect how script runs, especially within functions or loops. For example, \\
+   ~print(f'Word {s} has {len(syllables)} syllables')~ \\
+   ~print(f'Starting from {start_url} collected {len(url_list)} pages')~
+  4. You can also use the ~assert~ statement to make sure that the script does not proceed further if certain conditions are not met:\\
+    ~assert len(url_list)>0, f'nothing collected from {start_url}'~ 
+
+* Running your experiments 
+  1. Feel free to use ChatGPT to produce a skeleton for your task, but in your own code you should include only the bits of this skeleton which you can understand.
+  1. Please experiment by modifying the scripts you have downloaded: you can always return back to the original script as posted on Minerva. Once you know your script does at least something important, you can save it under a new name, so that any further modifications do not impact the version you work with.
+  3. When you restart your Colab environment, the previous cells have not run to initialise the variables. Check different options in the Runtime menu. Also there will be no files from the previous run in this environment.
+  4. Use python documentation and discussion forums. Documentation at https://python.org is extensive. Even more information is searchable through discussion forums.
+  5. Often errors in Colab are linked to Q&A at the Python StackExchange forum. They can provide lots of information about the problems experienced by other python users.
+
+* COMMENT Technical bits
+** Navigating in your directories
+#+begin_src python
+import os
+os.getcwd()
+os.chdir(full_path)
+#+end_src
+* Other sources to learn about Python
+  + Dirk Hovy's Python for Linguists, see http://www.dirkhovy.com/portfolio/papers/download/pfl_handout.pdf
+  + How to think like a computer scientist: http://openbookproject.net/thinkcs/
+  + Digiling Python Intro https://learn.digiling.eu/
+  + NLTK book: http://www.nltk.org/book/
+  + Collection of tutorials from https://pythonbasics.org
+  + Another collection from https://wiki.python.org/moin/BeginnersGuide/NonProgrammers
+
+
+
+bibliography:references.bib,serge.bib
+bibliographystyle:apalike
