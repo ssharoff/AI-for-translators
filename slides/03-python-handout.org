@@ -20,7 +20,7 @@
 
 At the end of these classes, you should be able to:
 
-- Use the basic functions of Google Colab
+- Use the basic functions of Google Colab/Jupyter Lab
 - Understand a simple python script
 - Edit it to improve its logic and output
 - Start your own corpus collection from the Web

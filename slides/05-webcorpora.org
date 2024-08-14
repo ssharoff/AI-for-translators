@@ -1,0 +1,103 @@
+#+TITLE: Web corpora
+#+OPTIONS: toc:nil
+#+LaTeX_CLASS: beamer
+#+BEAMER_THEME: Frankfurt
+#+LaTeX_CLASS_OPTIONS: [handout]
+#+LATEX_HEADER: \usepackage{stdpresent}
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
+#+LaTeX_HEADER: \usepackage{CJKutf8}
+#+LaTeX_HEADER: \newcommand{\ZH}[1]{\begin{CJK}{UTF8}{gbsn}#1\end{CJK}}
+#+OPTIONS: H:3
+
+* Language on the Web
+** Traditional corpora vs Web
+*** Traditional corpora vs Web
+  + Brown or BNC: large infrastructural projects
+  + Texts of different kinds available on the Web
+  + deWac, ukWac, itWac, ruWac\ldots\\
+    2 million Web pages, 2 billion words each
+  + deTenTen, enTenTen, itTenTen, ruTenTen\ldots\\
+    8 million Web pages, 10 billion words each
+  + Common Crawl: 3 billion pages in all languages
+** Specialised domains
+*** Specialised domains
+  + BNC :: ~arts,medical,natsci,socsci,techeng~
+  + Domains :: not well represented:\\
+  24 texts, 1.4 mln words for medicine\\
+  15 texts, 0.6 mln words for linguistics\\
+  4 texts, 0.1 mln words for chemistry
+
+* Practice of Web corpus collection
+** Queries for keywords
+*** Example of corpus collection
+ + Keywords from Wikipedia's Renewable Energy category \\
+#+ATTR_LATEX: :font \small
+| fossil fuel    | \ZH{化石燃料}|        R{ископаемое топливо}|
+| power station  | \ZH{发电厂}|   \R{электростанция}|
+| hydroelectricity| \ZH{水力发电}|        \R{гидроэнергетика}|
+| photovoltaics  | \ZH{太阳能光伏} |\R{фотоэлектричество}|
+ + Queries to Yahoo: \textit{``photovoltaics ``power station''}
+ +
+#+ATTR_LATEX: :align l|rrrr
+|             |   En |   Ru | Zh(CN) | Zh(TR) |
+|-------------+------+------+--------+--------|
+| URLs:       | 5762 | 5991 |    674 |    870 |
+| Words (MW): |  6.5 |  5.8 |    1.9 |   1.68 |
+ 
+
+*** Assessing the composition by keywords
+\scriptsize     
+\begin{tabular}{l|ll}
+7467 renewable energy&\R{5629 источник энергия} `energy source'\\
+4352 wind turbine&\R{4550 окружающий среда} `environment'\\
+3973 fossil fuel&\R{2754 электрический энергия} `electricity'\\
+3127 greenhouse gas&\R{2710 солнечный батарея} `solar cell'\\
+3049 natural gas&\R{2274 солнечный энергия} `solar energy'\\
+2539 wind farm&\R{2106 природный газ} `natural gas'\\
+2320 solar energy&\R{1994 тепловой энергия} `thermal energy'\\
+2265 energy efficiency&\R{1870 возобновлять источник} `renewable energy'\\
+1994 carbon dioxide&\R{1561 производство электроэнергия} `electricity generation'\\
+1920 solar cell&\R{1508 возобновлять источник энергия} `renewable energy source'\\
+1782 wind energy&\R{1439 изменение климат} `climate change'\\
+ 1722 generate electricity&\R{1401 парниковый газ} `greenhouse gas'\\
+ 1559 solar patch&\R{1315 альтернативный источник} `alternative source'\\
+ 1533 electricity generation&\R{1289 энергия ветер} `wind energy'\\
+ %% 1529 fuel cell&\R{1280 экологически чистый}\\
+ %% 1517 gas emission&\R{1270 устойчивый развитие}\\
+\end{tabular}
+
+
+** Focused crawling
+***  Crawling
+#+ATTR_BEAMER: :overlay <+->
+  + Parallel and near-parallel websites:\\
+     https://www.wipo.int/wipo_magazine_digital/en/
+  + Simple crawling: ~wget -m --no-parent~
+  + Focused crawling: selection of relevant pages
+  + Seed urls \to links from those pages \to urls
+  + Focus on what is relevant:
+    1. Language: ~glotlid, langdetect~
+    2. Keywords: on-topic keywords as extracted from seed urls
+  + https://www.bbcgoodfood.com/recipes/spatchcock-barbecue-chicken
+  + \to :: https://www.bbc.com/zhongwen/simp
+  + \to :: https://www.bbcgoodfood.com/review/best-air-fryers
+** Web page cleaning
+*** Parameters of cleaning
+#+ATTR_BEAMER: :overlay <+->
+    + Relevance: technical or not
+    + Duplicates and near-duplicates
+    + Saving to TXT from PDF, PPT, DOCX\\
+      Encodings: not necessarily UTF8
+    + HTML boilerplate
+    + Trafilatura library in Python:\\
+      ~text=extract(fetch_url(url), output_format="xml")~
+
+*** Webpage boilerplate
+    \pgfimage[width=0.8\textwidth]{Screenshot-Ontology.pdf}
+
+*** Basic points for preparing your corpora
+  + Web corpora are easy to create
+  + Comparable queries usually lead to comparable corpora
+  + Use specialised keywords to control their domains
+  + Clean your data: Trafilatura library
