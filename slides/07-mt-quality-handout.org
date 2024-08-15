@@ -125,6 +125,6 @@ Compare this terminology against the spam filtering example:
   + It fails to detect a realistic spam email as spam.
 
 
-# AIzaSyAf8tZeoQTHUfxGLLCWP4knCMObjQCBesU
-# trnsl.1.1.20191017T135053Z.ddb68d1496bd4b83.5dafe5a70a39082028845cc2956ef22a7470024f
+
+
 
