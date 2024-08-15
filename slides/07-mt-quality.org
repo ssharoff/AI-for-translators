@@ -1,0 +1,642 @@
+#+TITLE: Automatic Translation Quality and its Estimation
+# and its impact on post-editing
+#+DATE: 
+# +OPTIONS: toc:t
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [handout]
+#+LATEX_HEADER: \usepackage{stdpresent}
+#+LATEX_HEADER: \usepackage{apalike}
+# #+LATEX_HEADER: \usepackage{tikz}
+# #+LATEX_HEADER: \definecolor{tikz_red}{HTML}{F67280}
+# #+LATEX_HEADER: \usepackage{multicol}
+# #+LATEX_HEADER: \usepackage{multirow}
+
+#+BEAMER_THEME: Frankfurt
+#+OPTIONS: H:3
+
+#+LATEX_HEADER: \usepackage{CJKutf8}
+#+LATEX_HEADER: \newcommand{\ZH}[1]{\begin{CJK}{UTF8}{gbsn}#1\end{CJK}}
+#+LATEX_HEADER: \newcommand{\ZHT}[1]{\begin{CJK}{UTF8}{bsmi}#1\end{CJK}}
+
+
+* AI advances
+** ChatGPT and its rivals
+*** ChatGPT writing fiction and poetry
+\footnotesize
+
+**** /Write a fairy tale about the Turing machine/
+Once upon a time, in a far-off kingdom of logic and mathematics, there was a magical machine called the Turing machine. This incredible machine was created by a wise and brilliant mathematician named Alan Turing, and it was said that the Turing machine could solve any problem that any other ...
+
+**** /Write a limerick about the Turing Test/
+
+A computer once passed the Turing Test\\
+It fooled humans, just like the rest\\
+But as soon as it spoke\\
+Its true nature awoke\\
+And now it's a laughingstock at best\\
+
+# Ode to Haggis by Robert Burns
+# Nice seeing your honest, chubby face,
+# Great chieftain of the sausage race!
+
+**** /Write an ode to the Stilton cheese/
+
+# Oh Stilton cheese, thou king of blue,\\
+# Aged in the caves, a flavor so true,\\
+# Thy curds and whey, a noble blend,\\
+# A taste that all our senses doth send.\\
+
+# Thou art a food of great renown,\\
+# A British classic, prized and renowned,\\
+# From dairy cows, thy milk divine,\\
+# Aged with care, a flavor sublime.\\
+
+# In pies and tarts, thou art so fine,\\
+# A topping to make them truly divine,\\
+# With crackers and wine, thou dost pair,\\
+# A flavor so rich, beyond compare.\\
+
+Oh Stilton cheese, a treat so grand,\\
+A delicacy, loved throughout the land,\\
+With thy sharpness and tang, so bold,\\
+A cheese of true distinction, we are told.\\
+
+So let us raise a toast to thee,\\
+Oh Stilton cheese, so full of glee,\\
+Thou art the cheese of kings and queens,\\
+And in our hearts, forever supreme.\\
+
+# Write an amendment to the 
+*** \footnotesize /American Constitution Amendment on socks disappearing in washing machine/
+\footnotesize
+# provide for the common defense,
+\textbf{Preamble:} We the people of the United States, in order to form a more perfect union, establish justice, ensure domestic tranquility, promote the general welfare, and secure the blessings of liberty to ourselves and our posterity, do hereby address the issue of socks disappearing in the washing machine.
+
+\textbf{Article 1: Right to Possess Socks}\\
+1.1. All individuals have the right to possess socks and to have their socks remain intact after being washed.\\
+1.2. No individual shall be deprived of their socks without due process of law.\\
+1.3. The disappearance of socks in the washing machine shall be considered a violation of an individual's right to possess socks.\\
+
+\textbf{Article 2: Obligation of Washing Machine Manufacturers}\\
+2.1. Washing machine manufacturers shall be obligated to design and produce machines that do not cause socks to disappear during the washing process.\\
+2.2. Washing machine manufacturers shall be required to provide clear instructions on how to properly use and maintain their machines to prevent the disappearance of socks.\ldots\\
+# 2.3. Washing machine manufacturers shall be held liable for any damages caused by the disappearance of socks in their machines.
+
+# Article 3: Obligation of Laundry Service Providers
+# 3.1. Laundry service providers shall be obligated to take reasonable care to prevent the disappearance of socks during the laundering process.
+# 3.2. Laundry service providers shall be required to provide clear instructions to customers on how to properly label their socks and how to prevent the disappearance of socks.
+# 3.3. Laundry service providers shall be held liable for any damages caused by the disappearance of socks during the laundering process.
+
+\textbf{Article 4: Enforcement}\\
+4.1. Any individual whose socks have disappeared in the washing machine shall have the right to seek legal recourse against the manufacturer or laundry service provider responsible.\\
+4.2. The appropriate government agencies shall be responsible for enforcing this constitutional amendment and ensuring compliance with its provisions.
+
+* Capabilities of Language Models
+
+** Anatomy of language models
+*** Anatomy of language models
+#+ATTR_BEAMER: :overlay <+->
+  + LLMs predict missing words in known contexts: \\
+    /shine of the ... upon the harbour/\\
+    /light of the ... shining between clouds/
+  + NMT engines predict translations:\\
+     /to book a room/ \to /... une chambre/
+  + LLMs build cross-lingual links from their shared parameters without any translations cite:conneau20emerging\\
+      /Consult the .. of beam sizes below/ vs\\
+      \small /Vous pouvez consulter le .. des rémunérations des professeurs/\\
+      `you can consult the .. of the salaries of the teachers'
+  + Reinforcement Learning from Human Feedback (RLHF)\\
+     \to a reward model derived from user preference data
+
+*** Differences between LLMs and proper NMT
+#+ATTR_BEAMER: :overlay <+->
+    + Proper NMT (Google/DeepL) does one task reasonably well\\
+      Pre-trained language models are generic: they can produce texts beyond translation, such as explanations
+    +   :: They can also evaluate translation quality
+    +   :: They can also adapt their output via *prompt engineering*
+    + NMT has been trained on good quality parallel resources, mostly from public institutional repositories (Europarl, UN or instruction manuals)\\
+      LLMs have been trained on comparable corpora by sharing parameters
+    + Advantages of comparable corpora cite:sharoff13buccoverview\\
+      More data, more topics, more genres, lack of translationese
+    + LLMs are much heavier in deployment: billions of parameters 
+
+** MT capabilities
+
+*** MT capabilities
+    \small
+     + /Déchets d'emballages composites principalement constitués de papier et de plastique [ et d'aluminium ] ne contenant pas de résidus ni de matières visées à l'annexe I à des concentrations suffisantes pour présenter une des caractéristiques de danger figurant dans l'annexe III/
+     + ref :: /Composite packaging waste consisting of mainly paper and some plastic [and aluminium], not containing residues and not containing Annex I materials in concentrations sufficient to exhibit Annex III characteristics/
+     + GT :: /Composite packaging wastes consisting primarily of paper and plastics [ and aluminium] not containing residues or Annex I materials in concentrations sufficient to exhibit Annex III hazard characteristics/
+     + GPT :: /Packaging waste mainly consisting of paper and plastic [and aluminum] that does not contain any residues or substances listed in Annex I at concentrations sufficient to exhibit any of the hazardous characteristics listed in Annex III./
+
+*** MT explanations
+    \small
+**** Translate the following sentence
+     + /Déchets d'emballages composites principalement constitués de papier et de plastique [ et d'aluminium ] ne contenant pas de résidus ni de matières visées à l'annexe I à des concentrations suffisantes pour présenter une des caractéristiques de danger figurant dans l'annexe III/
+     + \to :: /Packaging waste mainly consisting of paper and plastic [and aluminum] that does not contain any residues or substances listed in Annex I at concentrations sufficient to exhibit any of the hazardous characteristics listed in Annex III./
+
+**** Why did you translate "figurant" as "listed"?
+     \small
+The word "figurant" in French means "appearing" or "featured". In this context, "figurant dans l'annexe III" means "appearing in Annex III". In English, the most common way to express this is to use the word "listed", which means "included on a list". Therefore, "figurant dans l'annexe III" can be accurately translated as "listed in Annex III".
+
+*** MT quality discussion 
+\small
+#+ATTR_BEAMER: :overlay <+->
+  + Translate the following sentence "Sin embargo, este documento precisa en elementos analíticos discursivos para comprender  el  porqué  Luis  Guillermo  Solís  logra  ganar  las  elecciones  con  un  partido  sin  previas experiencias como gobierno central."
+  + \to :: /However, this document specifies in analytical discursive elements to understand why Luis Guillermo Solís manages to win the elections with a party without prior experiences as central government./
+  + Please score the quality of this translation on a continuous scale from 0 to 100, where score of zero means "no meaning preserved" and score of one hundred means "perfect meaning and grammar".
+  + \to :: Based on my analysis, I would give this translation a score of 80.\\
+    The translation conveys the meaning of the original sentence accurately, but there are some minor grammatical errors and awkward phrasing that could be improved. Additionally, there are some areas where the wording could be polished to make the sentence flow more smoothly. 
+
+
+*** \small Please explain which awkward phrasing needs to be improved
+#+ATTR_BEAMER: :overlay <+->
+  + \small /However, this document specifies in analytical discursive elements to understand why Luis Guillermo Solís manages to win the elections with a party without prior experiences as central government./
+  + \to :: Sure, here are some examples of awkward phrasing in the translation that could be improved:
+  + \to :: "experiences as government central" - this would be more commonly phrased as "central government experience" or "experience in central government."
+  + \to :: "manages to win the elections" - while technically correct, a more natural phrasing might be "succeeds in winning the elections" or "is able to win the elections".
+  + \to :: "without prior experiences" - this could be rephrased as "without prior experience" or "without prior governmental experience."
+  + \to :: These are relatively minor issues, but addressing them could help make the translation read more smoothly and naturally.
+
+
+*** Eliciting MT corrections
+\small
+#+ATTR_BEAMER: :overlay <+->
+  + What is wrong with the translation "this document specifies"?
+  + \to :: There is nothing inherently wrong with the translation "this document specifies" as it accurately conveys the meaning of the original sentence. However, it is worth noting that there may be other ways to translate the phrase "este documento precisa" depending on the context and the specific meaning intended by the author.\\
+   The word "precisa" in Spanish can have several meanings depending on the context, such as "specifies", "clarifies", "details", "defines", "delineates", or "outlines". Therefore, a translator must take into account the context of the sentence and choose the most appropriate translation based on the intended meaning.
+
+
+*** Eliciting MT corrections
+\small
+#+ATTR_BEAMER: :overlay <+->
+  + Still the expression "the document specifies in discursive analytical elements to understand" is not fully fluent in English.
+  + \to :: You are correct. While the phrase "the document specifies" may be grammatically correct, it is not the most natural way to express this idea in English. A more idiomatic way to convey this idea would be to use a phrase like "the document employs discursive analytical elements to understand" or "the document uses discursive analytical elements to explain". These phrasings convey the same meaning while sounding more natural in English.
+  + "discursive analytical elements" is also an awkward expression.
+  + \to :: You are right, "discursive analytical elements" may not be the most natural expression in English. A more common way to express this idea might be to say "analytical tools" or "analytical methods". This phrasing would still convey the idea that the document employs a particular approach or methodology to analyze the topic at hand, without using a phrase that might sound awkward or stilted to a native English speaker.
+
+*** MT paraphrasing
+\small
+  + Please translate the following sentence "Sin embargo, este documento precisa en elementos analíticos discursivos para comprender  el  porqué  Luis  Guillermo  Solís  logra  ganar  las  elecciones  con  un  partido  sin  previas experiencias como gobierno central." from Spanish in the *most literal* way while still preserving the meaning, so that it is understandable in English.
+  + \to :: /However, this document specifies in discursive analytical elements to understand why Luis Guillermo Solís manages to win the elections with a party without prior experiences as central government./
+  + $\leftarrow$ :: /However, this document specifies in analytical discursive elements to understand why Luis Guillermo Solís manages to win the elections with a party without prior experiences as central government./
+
+
+*** Your task
+#+ATTR_BEAMER: :overlay <+->
+   + Choose two of the following LLMs:
+     + OpenAI's ChatGPT: https://chat.openai.com/
+     + Google's Gemini: https://gemini.google.com/
+     + Microsoft's CoPilot: https://chat.bing.com/
+     + Anthropic's Claude: https://claude.ai/
+     + Inflection's Pi:  https://pi.ai/
+   + Take an ST and its TT with *known* flaws
+   + Translate its problematic sentences with GAI tools
+   + Produce another translation for the same sentences with Google Translate, DeepL, MateCat, Phrase,...
+   + Question the flaws with the LLM tools
+
+** Other possibilities with LLMs
+*** Term extraction
+\footnotesize
+ + For the English sentence "Composite packaging waste consisting of mainly paper and some plastic [and aluminium], not containing residues" and its French translation "Déchets d'emballages composites principalement constitués de papier et de plastique [ et d'aluminium ] ne contenant pas de résidus", extract terms and type each English term and its French equivalent.
+
+#+begin_verse
+English terms:
+Composite packaging waste
+mainly
+paper
+some plastic
+[and aluminium]
+not containing residues
+French equivalents:
+Déchets d'emballages composites
+principalement
+papier
+de plastique
+[et d'aluminium]
+ne contenant pas de résidus
+#+end_verse
+
+*** Term extraction
+\small
+ + /For the following English sentence "Composite packaging waste consisting of mainly paper and some plastic [and aluminium], not containing residues" and its French translation "Déchets d'emballages composites principalement constitués de papier et de plastique [ et d'aluminium ] ne contenant pas de résidus", extract five technical terms and type each English term and its French equivalent separated by =. Do not include the function words./
+ + \to :: English terms = French equivalents:
+
+#+begin_verse
+Composite packaging = Emballages composites
+Waste = Déchets
+Plastic = Plastique
+Aluminium = Aluminium
+Residues = Résidus
+#+end_verse
+
+*** COMMENT AI
+ for translators
+ + Language difficulty on the sentence/token level: what makes a sentence difficult for a language learner (English and Arabic),
+ + MT quality: which parts caused catastrophic translation errors, examples 
+
+https://arxiv.org/pdf/2301.13294.pdf
+
+real-time adaptive MT through in-context learning.
+In particular, we would like to understand the quality with which such models can perform the following tasks, without any further training:
+• Adapting new translations to match the terminology and style of previously approved TM
+fuzzy matches, at inference time;
+• Matching or outperforming the quality of
+translations generated by encoder-decoder
+MT models across a number of languages;
+• Fixing translations from stronger encoderdecoder MT systems using fuzzy matches,
+which is especially useful for low-resource
+languages; and
+• Terminology-constrained MT, by first defining terminology in the relevant sentences or
+dataset, and then forcing new translations to
+use these terms.
+
+*** Disembodied language models
+    + No model of the world and no model of society\\
+      Predictions from millions of sigmoids in the local context\\
+      Training on 500 billion of words, 90,000 years of reading
+**** Biases from training corpora:
+\small
+#+ATTR_BEAMER: :overlay <+->
+    + Translate "The doctor was a great listener" into Spanish
+    + \to :: "El doctor era un gran oyente." *male*
+    + Translate "The nurse was a great listener" into Spanish
+    + \to :: "La enfermera era una gran oyente." *female*
+    + Translate "John met his wife in the hot spring of 1988." into Spanish and Russian
+    + \to :: "John conoció a su esposa en la fuente termal en 1988."
+    + \to :: "\R{Джон встретил свою жену горячим источником 1988 года.}"\\
+      `met his wife *with* the source of hot water of 1988'
+
+# Translate "He was a polymath who excelled in many fields." into Spanish
+# "Él era un polímata que destacó en muchos campos."
+
+# Serge Sharoff
+# Translate "He was a polymath who excelled in many fields." into Chinese
+# \ZH{他是一个博学多才的人，在很多领域都表现出色。} (Simplified Chinese)
+
+# \ZHT{他是一個博學多才的人，在很多領域都表現出色。} (Traditional Chinese)
+
+# Translate "Uncle Bill hit the nail on the head with his Scooby versus Evo musings in the report" into French
+# GPT: "Oncle Bill a touché dans le mille avec ses réflexions sur Scooby versus Evo dans le rapport."
+# MT: Oncle Bill a mis le doigt sur la tête avec ses réflexions Scooby contre Evo dans le rapport
+
+#     + cite:zerva22MTQEfindings setup of predictions from MTQE
+#     + cite:freitag21evaluation for the evaluation 
+
+
+* Quality Evaluation 
+** Hallucinations
+*** Hallucinations
+#+ATTR_BEAMER: :overlay <+->
+**** A dictionary of hallucinations (Blom, 2010)
+  a percept, experienced by a waking individual, in the absence of an appropriate stimulus from the extracorporeal world
+**** MT hallucinations cite:guerreiro23hallucinations
+Sacrificing adequacy for the sake of fluency leading to pathological translations that can severely damage user trust and pose serious safety concerns
+**** Examples of hallucinations
+#+ATTR_LATEX: :width 0.95\textwidth
+[[file:hallucinations.jpg]]
+
+*** Detection of hallucinations
+ALTI+ Score cite:ferrando22alti for quality of NMT:\\
+interpreting the weights
+    
+  1. a minimum threshold quality score for the original translations, and
+  2. an extremely low maximum quality score for the perturbed translations
+
+Source: Facebook M2M models
+# https://arxiv.org/pdf/2303.16104.pdf
+
+*** Natural hallucinations
+\small
+#+ATTR_BEAMER: :overlay <+->
+   + \ZH{伊氏西爪龙属于驰龙科，是迅猛龙的表亲。}
+   + MTM :: Isaiah also revealed what would become of those idols.
+   + ref :: /Hesperonychus elizabethae is a species of the family Dromaeosauridae and is a cousin of Velociraptor./
+   + GT :: /It belongs to the Dromaeosauridae and is a cousin of Velociraptor./
+   + GPT :: /Hesperonychus belongs to the Dromaeosauridae family and is a close relative of the Velociraptor. It was a small carnivorous dinosaur found in the fossil record of Canada./
+
+*** Hallucination rate on Facebook models
+\setlength{\tabcolsep}{2pt}
+English centric directions
+
+\vspace{-3ex}
+| Model    | Low Resource(%) | Mid Resource(%) | High Resource (%) |
+|----------+-----------------+-----------------+-------------------|
+| SMaLL100 |            2.35 |           0.055 |             0.005 |
+| M2M (S)  |           15.20 |           0.254 |             0.025 |
+| M2M (M)  |           12.53 |           0.110 |             0.010 |
+| M2M (L)  |           11.22 |           0.034 |             0.000 |
+ 
+Non-English centric directions
+
+\vspace{-3ex}
+| Model    | Low Resource(%) | Mid Resource(%) | High Resource (%) |
+|----------+-----------------+-----------------+-------------------|
+| SMaLL100 |            2.16 |           0.054 |             0.025 |
+| M2M (S)  |           12.61 |           0.467 |             0.075 |
+| M2M (M)  |           12.22 |           0.172 |             0.000 |
+| M2M (L)  |            6.58 |           0.077 |             0.000 |
+
+** Discourse-aware translation 
+*** Discourse-aware translation
+#+ATTR_BEAMER: :overlay <+->
+    + Document-level consistency cite:voita19context  \\
+      Ellipsis, terminology and lexical cohesion
+    + GT :: \ZH{他收到消息了。 他做的太对了。}
+    +   :: /He got the message. He absolutely did the right thing./
+    + $\leftarrow$ :: /He got the message. Damn right he did./
+    + GPT :: \ZH{他收到了信息。他确实明白了。}
+    + Pro-drop is common in a number of languages:\\
+      \ZH{このケーキは美味しい。気に入った？} \to /This cake is tasty./\\
+      /Did like?/ (Google Translate: /Favorite?/)
+    + GPT :: /This cake is delicious. Do you like it?/
+
+# You called the cops? Of course I did.}.
+# He got the message. Damn right he did.}.
+# You must miss her. Yeah, I do.}.
+# What are you doing? You can't kill Jones. You're too late. I already did.}.
+# You know I hate goodbyes. I do.}.
+# If you would've bought the election, you would've never known. But now you do.}.
+# I think I fooled myself into thinking that things would be different. I think you did, too.}.
+# I've been unfailingly loyal. I really believed in it. And I still do.}.
+# My mother always wanted this for me. And I broke her heart because I didn't.}.
+*** Document-level MT cite:wang23documentmt
+Counting *how many* discourse phenomena (ellipsis and anaphora) ChatGPT gets right in comparison to Google Translate
+**** Three kinds of prompts for ChatGPT
+ + P1 :: Please provide the {TARGET} translation for the following {SOURCE} sentence: [S]
+ + P2 ::  Translate the following {SOURCE} sentences into {TARGET}: [S1], [S2] ...
+ + P3 :: Translate this document from {SOURCE} into {TARGET}:  [S1], [S2] ...
+
+** Quality estimates
+*** Quality templates cite:kocmi23gpt
+\small
+Score the following translation from {source} to {target}\\
+/with respect to the human reference/ with one to five stars.\\
+Where one star means "Nonsense/No meaning preserved",\\
+two stars mean "Some meaning preserved, but not understandable",\\
+three stars mean "Some meaning preserved and understandable",\\
+four stars mean "Most meaning preserved with few grammar mistakes",\\
+and five stars mean "Perfect meaning and grammar".\\
+{source} source: "{source segment}"\\
+/{target} human reference: "{reference segment}"/\\
+{target} translation: "{target segment}"\\
+Stars:
+*** Example of filling templates
+\small
+Score the following translation from Czech to English\\
+with respect to the human reference with one to five stars.\\
+Where one star means "Nonsense/No meaning preserved",\\
+two stars mean "Some meaning preserved, but not understandable",\\
+three stars mean "Some meaning preserved and understandable",\\
+four stars mean "Most meaning preserved with few grammar mistakes",\\
+and five stars mean "Perfect meaning and grammar".\\
+Czech source: /Proto se nakonec hodnota odpadu neodečítala./\\
+Human reference: /Therefore, at the definitive stage, the deduction for waste was reversed./\\
+Machine translation: /Therefore, in the end, the value of waste was not deducted./\\
+
++ Stars: \bigstar \bigstar \bigstar \bigstar
++ \to :: The translation is accurate and captures the meaning of the original sentence well, but there is a slight difference in the phrasing of the English reference. Instead of "reversed", the translation uses "not deducted", which is a more literal and straightforward interpretation of the original.
+
+
+*** Template *without* human reference
+\small
+Score the following translation from Czech to English with one to five stars.\\
+Where one star means "Nonsense/No meaning preserved",\\
+two stars mean "Some meaning preserved, but not understandable",\\
+three stars mean "Some meaning preserved and understandable",\\
+four stars mean "Most meaning preserved with few grammar mistakes",\\
+and five stars mean "Perfect meaning and grammar".\\
+Czech source: "Proto se nakonec hodnota odpadu neodečítala."\\
+Machine translation: /Therefore, in the end, the value of waste was not deducted./\\
+Stars:
+
++ Stars: \bigstar \bigstar \bigstar \bigstar
+
+
+
+
+*** Chain of thought prompting
+Chain of thought---intermediate reasoning steps cite:wei22chain
+
+\small
+ + Yes or no: Is it possible to see frost during some college commencements?
+ + \to :: It depends on the location and time of year of the college commencement. In some regions, it is common to see frost that can occur in winter, while in other regions, it may be less common. Therefore, the answer to this question *cannot be* a simple "yes" or "no" as it varies based on the specific circumstances of the commencement ceremony.
+ + Yes or no: Could a llama give birth twice during the War in Vietnam (1945-46)?
+ + \to :: *No,* it is not possible for a llama to give birth twice during the War in Vietnam (1945-46) as llamas have a gestation period of approximately 11 months, and the War in Vietnam (1945-46) lasted for only *a few years.* Therefore, this scenario is not possible.
+
+
+*** Training in the chain of thought
+\footnotesize
+#+ATTR_BEAMER: :overlay <+->
++ Q: Yes or no: Could a llama give birth twice during War in Vietnam (1945-46)?\\
+  A: The War in Vietnam (1945-46) lasted 6 months. The gestation period for a llama is 11 months, so it is more than 6 months. Thus, a llama could not give birth twice during this war. So the answer is no.\\
+  Q: Yes or no: Could Brooke Shields succeed at University of Pennsylvania?\\
+  A: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\\
+  Q: Yes or no: Is it possible to see frost during some college commencements?
++ \to :: A: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+
+*** Simple translation evaluation
+
+**** Standard prompt
+Source: <SRC>\\
+/Reference: <REF>/\\
+Translation: <TGT>\\
+Identify the major and minor errors in this translation. Note that Major errors refer to actual translation or grammatical errors, and Minor errors refer to smaller imperfections, and purely subjective opinions about the translation. \\
+Count the number of major and minor errors and compute the final score for this translation. Deduct 5 points for each major error. Deduct 1 point for each minor error. If the translation has no errors, its score will be 0.
+
+*** Simple translation evaluation
+
+**** Chain of thought prompt cite:wei22chain
+\footnotesize
+Source: They were addressed to her son, who has autism and lives in a private care facility, she said. But instead of her son's name inside...\\
+# when you opened them, the letters said Dear Maine's Department of Health and Human Services -- in Cincinnati, she told local media. \\
+# Reference: Sie seien an ihren Sohn adressiert, der an Autismus leidet und in einer privaten Pflegeeinrichtung lebt, sagte sie. Aber als Sie die Briefe öffnete, stand darin nicht der Name ihres Sohnes, sondern sie waren an das Gesundheitsministerium von Maine gerichtet, in Cincinnati, wie sie den lokalen Medien sagte. \\
+Translation: Sie wurden an ihren Sohn gerichtet, der Autismus hat und in einer privaten Pflegeeinrichtung lebt, sagte sie. Aber anstelle des Namens...\\
+# ihres Sohnes im Inneren, als Sie sie öffneten, sagten die Briefe Dear Maine 's Department of Health and Human Services -- in Cincinnati, sagte sie den lokalen Medien. \\
+Identify the major and minor errors in this translation. \\
+# Note that Major errors refer to actual translation or grammatical errors, and Minor errors refer to smaller imperfections, and purely subjective opinions about the translation. \\
+Deduct 5 points for each major error. Deduct 1 point for each minor error. If the translation has no errors, its score will be 0.\\
+
+A: Major errors:\\
+(1) Span “Dear Maine 's Department of Health and Human Services” – Untranslated text\\
+(2) Span “im Inneren” – Mistranslation\\
+
+Minor errors:\\
+(1) “Briefe ,,” – Punctuation\\
+(2) “wurden” – Grammar\\
+(3) Span “im Inneren, als Sie sie öffneten, sagten die Briefe” – Awkward Style\\
+Based on the above evaluation, The final score for this translation is -5-5-1-1-1=-13.
+# Use the template above to answer the following question:\\
+
+# Q: Source: <SRC>\\
+# Reference: <REF>\\
+# Translation: <TGT>\\
+# Based on the given source and reference, identify the major and minor errors in this translation. Note that Major errors refer to actual translation or grammatical errors, and Minor errors refer to smaller imperfections, and purely subjective opinions about the translation. \\
+# Count the number of major and minor errors and compute the final score for this translation. Deduct 5 points for each major error. Deduct 1 point for each minor error. If the translation has no errors, its score will be 0.\\
+
+# A: 
+
+*** Lack of success with ChatGPT
+    \small
+Use the template above to answer the following question:\\
+Q: Source: Xbox Game Pass Ultimate members get instant access to a collection of the most popular series and titles at no additional cost.\\
+Translation: Xbox Game Pass Ultimate-Mitglieder erhalten sofortigen *Griff* auf eine Sammlung von den *beliebtesten* Serien und Titeln ohne zusätzliche Kosten.\\
+Identify the major and minor errors in this translation. Note that Major errors refer to actual translation or grammatical errors, and Minor errors refer to smaller imperfections, and purely subjective opinions about the translation. \\
+Deduct 5 points for each major error. Deduct 1 point for each minor error. If the translation has no errors, its score will be 0.\\
+A: Major errors:\\
+None\\
+Minor errors:\\
+None\\
+Based on the above evaluation, the final score for this translation is 0.
+
+*** Same request in Google Bard
+    \small
+Q: Source: Xbox Game Pass Ultimate members get instant access to a collection of the most popular series and titles at no additional cost.\\
+Translation: Xbox Game Pass Ultimate-Mitglieder erhalten sofortigen Griff auf eine Sammlung von den beliebtesten Serien und Titeln ohne zusätzliche Kosten.
+ + Major errors:
+   + The word "Griff" is not the correct translation of "access". The correct translation is "Zugriff".
+   + The word "Serien" is plural, but the word "Titel" is singular. The translation should be "Sammlung von den beliebtesten Serien und Titeln".
+ + Minor errors:
+   + The word "beliebtesten" is unnecessary. The translation would be the same without it.
+The total score for the translation is 10 points. There is 1 major error, which is worth 5 points. There is also 1 minor error, which is worth 1 point. Therefore, the total score is 10 - 6 = 4 points.
+
+# Here is the corrected translation:
+# Xbox Game Pass Ultimate-Mitglieder erhalten sofortigen Zugriff auf eine Sammlung der beliebtesten Serien und Titel ohne zusätzliche Kosten.
+
+*** Reflective chain-of-thought prompts
+\small
+Source: <SRC>\\
+Translation: <TGT>\\
+
+Given the source text and its translation, please list the parameters to define whether the translation contains major errors or not.
+
+1. Accuracy: Check if the translation accurately conveys the meaning and details described in the source text. Are all the key points and descriptions accurately translated?
+2. Consistency: Ensure that the translation maintains consistency in terminology, style, and tone throughout. ...
+
+Now please consider applying these criteria to list the major errors in the translation.
+# translation. Note that Major errors refer to actual translation or grammatical errors,
+# and Minor errors refer to smaller imperfections, and purely subjective opinions about
+# the translation.
+# {src_lang} source: "{source}"
+# {tgt_lang} human reference: "{reference}"
+# {tgt_lang} translation: "{candidate}"
+# Errors: {error1:span} - {error1:severity}/{error1:category}; {error2:span} - ...
+# Figure 2: The AUTOMQM prompt used in this paper. Parts in purple are only included for reference-based
+# evaluation, while parts in orange represent slots for outputs, and are only included for in-context examples.
+
+*** Experimental methodology
+#+ATTR_BEAMER: :overlay <+->
+    + Dependent (prediction) and independent variables
+    + Time to translate (*regression*): document or sentence level
+    + *Classification* of accuracy\\
+      document or sentence level
+    + Prediction quality evaluation measures
+      - Regression: correlation, error range (RMSE, MAE)
+      - Classification: accuracy, precision, recall, F1
+    + Keep a record: for how long or how often
+
+
+* Conclusions
+*** Open questions
+#+ATTR_BEAMER: :overlay <+->
+    + We have more powerful tools
+    + but :: they leave a lot of open questions
+    + Satisfaction: what is interesting in your jobs and what is the contribution of AI?
+    + The balance between translation, post-editing, pre-editing and other translation-related tasks
+    + Speed of technology and replacement of humans: \\
+      different principles of intelligence
+
+*** References
+    :PROPERTIES:
+    :BEAMER_opt: allowframebreaks
+    :END:
+\footnotesize
+bibliography:references.bib,serge.bib
+bibliographystyle:apalike
+
+
+
+** COMMENT NMT questions
+*** Discuss the most common problems in the output of Neural Machine Translation models.
+Neural Machine Translation (NMT) models are widely used for translating text from one language to another. Despite the impressive progress that has been made in recent years, NMT models still face several challenges that can lead to errors in translation. Some of the most common problems in the output of NMT models are:
+
+Vocabulary mismatches: NMT models use a fixed vocabulary during training, which means that words outside the vocabulary are either replaced with an unknown token or dropped entirely. If the input contains words that are not in the vocabulary, the model may struggle to generate the correct translation.
+
+Out-of-context translations: NMT models have a limited understanding of the context of the input sentence. This can lead to translations that are technically correct, but do not make sense in the context of the sentence. For example, a model may translate the sentence "I have a headache" to "I own a headache" because it does not understand the difference between "have" and "own".
+
+Ambiguity: Many words in natural language have multiple meanings, and NMT models may not always choose the correct meaning in context. For example, the word "bank" can refer to a financial institution or the side of a river. Without proper context, the model may choose the wrong meaning.
+
+Rare words or phrases: NMT models may struggle with translating rare words or phrases that are not common in the training data. This is because the model may not have learned the correct translation for these words or phrases.
+
+Structural differences between languages: Different languages have different sentence structures and word orders. This can be particularly challenging for NMT models, which may struggle to generate translations that follow the correct structure. For example, some languages may place the verb at the end of the sentence, while others place it at the beginning.
+
+Gender or cultural biases: NMT models may perpetuate biases that are present in the training data. For example, a model may consistently translate the pronoun "he" to a male gender, even when the gender is not specified in the original sentence. Similarly, cultural biases can also affect the model's translation output.
+
+To address these issues, researchers are exploring a range of approaches, including using larger and more diverse training data, incorporating context and domain knowledge into the model, and developing techniques to mitigate bias. However, the challenges remain, and achieving high-quality translations with NMT models remains an active area of research.
+*** Please give specific examples of problems in translating rare words for translation from French.
+Translating rare words or phrases can be a challenge for NMT models, especially when the model has not encountered the word or phrase in the training data. Here are some specific examples of problems that can arise when translating rare words from French:
+
+Technical terms: French, like any language, has many technical terms that are specific to certain fields. For example, the French word "réactogène" refers to a substance that can cause an allergic reaction, but it is not a commonly used word. A translation model that has not encountered this word in the training data may struggle to generate an accurate translation.
+
+Regional dialects: French is spoken in many different regions around the world, and each region has its own dialect and vocabulary. For example, the French spoken in Quebec, Canada, is different from the French spoken in France. A translation model that has not been trained on data from a particular region may struggle to translate words that are specific to that region.
+
+Idiomatic expressions: French, like any language, has many idiomatic expressions that can be difficult to translate literally. For example, the French expression "faire la grasse matinée" means to sleep in or have a lie-in, but translating it literally as "make the fat morning" would not make sense in English. A translation model that has not learned the correct meaning of this expression may struggle to generate an accurate translation.
+
+Neologisms: French, like any language, is constantly evolving, and new words are added to the language all the time. For example, the French word "téléréalité" refers to reality TV, but it is a relatively new word that may not be present in older training data. A translation model that has not encountered this word in the training data may struggle to generate an accurate translation.
+
+To address these challenges, researchers are exploring approaches such as incorporating additional data sources and using techniques like subword segmentation to handle rare or unknown words more effectively.
+*** Please give a specific examples of MT making errors in translation from Canadian French.
+Machine translation (MT) can make errors in translation from Canadian French, which is a distinct variety of French spoken in Canada. Here are some specific examples of errors that can occur:
+
+False friends: Canadian French and European French have some differences in vocabulary and pronunciation, which can lead to false friends - words that appear to be similar in both languages but have different meanings. For example, the Canadian French word "une liqueur" refers to a type of alcoholic beverage, while in European French it refers to a non-alcoholic syrup. If an MT system trained on European French encounters this word in Canadian French text, it may generate an incorrect translation.
+
+Regional differences: As with any language, there are regional variations in Canadian French that can be difficult for an MT system to handle. For example, the Canadian French word "dépanneur" refers to a small convenience store, but this word is not used in European French. If an MT system trained on European French encounters this word in Canadian French text, it may generate an incorrect translation.
+
+Idiomatic expressions: Canadian French has many idiomatic expressions that may not have direct translations in other languages. For example, the expression "j'ai une coche de faite" is a Quebecois expression that means "I've made a lot of progress". An MT system that is not familiar with this expression may struggle to generate an accurate translation.
+
+Cultural references: Canadian French speakers may make references to Canadian culture or history that are not familiar to speakers of other languages. For example, the Canadian French expression "c'est plate comme la vie" translates to "it's boring like life" and is a reference to the Canadian film "Les Boys". An MT system that is not familiar with this reference may generate an incorrect translation.
+
+To address these challenges, researchers are exploring approaches such as incorporating more Canadian French data into the training data, developing techniques to handle regional and cultural differences, and improving the MT system's ability to handle idiomatic expressions.
+*** Please give any specific examples of abovementioned errors in out-of-context translation.
+Sure, here are some specific examples of errors that can occur in out-of-context translation from Canadian French:
+
+False friends: The Canadian French word "carré" can refer to a square or rectangular shape, but it can also mean a spicy meat pie that is popular in Quebec. If an MT system encounters this word out of context, it may generate an incorrect translation. For example, a translation of "j'aime manger un carré" as "I like to eat a square" would be incorrect in this context.
+
+Regional differences: The Canadian French word "tuque" refers to a type of knitted hat that is popular in Canada, but it is not used in European French. If an MT system encounters this word out of context, it may generate an incorrect translation. For example, a translation of "j'ai besoin d'une tuque" as "I need a beanie" would be incorrect in this context.
+
+Idiomatic expressions: The Canadian French expression "faire la file" means to wait in line, but if an MT system encounters this expression out of context, it may generate an incorrect translation. For example, a translation of "j'ai fait la file pendant une heure" as "I made the line for an hour" would be incorrect in this context.
+
+Cultural references: The Canadian French phrase "une poutine" refers to a popular Quebecois dish made of french fries, cheese curds, and gravy. If an MT system encounters this phrase out of context, it may generate an incorrect translation. For example, a translation of "j'ai mangé une poutine hier soir" as "I ate a poutine last night" would be correct in this context, but if the reader is not familiar with the dish, the translation may not convey the intended meaning.
+*** which examples to use to demonstrate common errors in Neural Machine Translation?
+Neural Machine Translation (NMT) has made significant progress in recent years and has shown promising results in many language pairs. However, like any other machine learning algorithm, NMT systems are not perfect and can make errors.
+
+Here are some examples that demonstrate common errors in Neural Machine Translation:
+
+Ambiguity: NMT systems can struggle with sentence structures that have multiple possible meanings. For example:
+Source: The bank is closed for the weekend.
+Translation 1: La banque est fermée pour le week-end. (correct)
+Translation 2: La banque est fermée sur le week-end. (incorrect)
+
+In the second translation, the NMT system misinterpreted the preposition "for" as "on" and produced an incorrect translation.
+
+Rare Words or Out-of-Vocabulary (OOV) Words: NMT systems can struggle with rare words or words that are not in their training data. For example:
+Source: He was a polymath who excelled in many fields.
+Translation: Il était un polyglotte qui excellait dans de nombreux domaines. (incorrect)
+
+In this example, the NMT system misinterpreted the word "polymath" as "polyglotte" because it is a rare word that is not in the system's training data.
+
+Idiomatic Expressions: NMT systems can struggle with idiomatic expressions, which are phrases that have a different meaning than their literal interpretation. For example:
+Source: She hit the nail on the head.
+Translation: Elle a frappé le clou sur la tête. (literal translation, incorrect)
+Translation: Elle a visé juste. (idiomatic translation, correct)
+
+In this example, the NMT system produced an incorrect literal translation of the idiom, which does not convey the intended meaning.
+
+Gender Bias: NMT systems can also exhibit gender bias, where they associate certain professions or roles with a specific gender. For example:
+Source: The doctor was a great listener.
+Translation 1: Le docteur était un grand auditeur. (gender-neutral, correct)
+Translation 2: La docteure était une grande auditrice. (feminine, incorrect)
+
+In the second translation, the NMT system wrongly assumed that the doctor was a female and produced an incorrect translation that reinforced gender stereotypes.
+
+These examples demonstrate that while NMT systems have made significant progress in recent years, they are still prone to errors and biases. Therefore, it is essential to carefully evaluate NMT output and identify and correct errors to improve their overall performance.

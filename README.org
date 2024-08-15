@@ -15,3 +15,7 @@ Slides for the module on AI for translators.
  4. Linguistic annotation:   [[./slides/04-annotations.pdf]]
  5. Building corpora from the Web:   [[./slides/05-webcorpora.pdf]]\\
     Practical:  [[./slides/05-webcorpora-handout.pdf]]
+ 6. Assessing corpus composition:   [[./slides/06-composition.pdf]]\\
+    Practical:  [[./slides/06-composition-handout.pdf]]
+ 7. Automatic assessment of translation quality:   [[./slides/07-quality.pdf]]\\
+    Practical:  [[./slides/07-quality-handout.pdf]] 

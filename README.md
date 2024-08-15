@@ -22,3 +22,11 @@ Slides for the module on AI for translators.
     [./slides/05-webcorpora.pdf](./slides/05-webcorpora.pdf)  
     Practical:
     [./slides/05-webcorpora-handout.pdf](./slides/05-webcorpora-handout.pdf)
+6.  Assessing corpus composition:
+    [./slides/06-composition.pdf](./slides/06-composition.pdf)  
+    Practical:
+    [./slides/06-composition-handout.pdf](./slides/06-composition-handout.pdf)
+7.  Automatic assessment of translation quality:
+    [./slides/07-quality.pdf](./slides/07-quality.pdf)  
+    Practical:
+    [./slides/07-quality-handout.pdf](./slides/07-quality-handout.pdf)

@@ -1,0 +1,98 @@
+*MODL5007:* *Introduction to Corpus Linguistics for Translators*
+
+*/Corpus collection/*
+
+* Outline of exercises
+  :PROPERTIES:
+  :CUSTOM_ID: outline-of-exercises
+  :CLASS: unnumbered
+  :END:
+
+On completion of these exercises, you should be able to:
+
+- Navigate in Wikipedia categories to find comparable texts;
+
+- Create a small corpus of comparable texts from Wikipedia;
+
+- Create a bigger corpus by making queries to Google;
+
+- Load this corpus into Sketchengine to extract terminology.
+
+* Comparable corpora from Wikipedia
+  :PROPERTIES:
+  :CUSTOM_ID: comparable-corpora-from-wikipedia
+  :END:
+
+1. Find English Wikipedia entries on the topic of International law (use
+   =Categories=);
+
+2. Select about 10 entry pairs with iwikis between English and your
+   language;
+
+3. Ensure their comparability in terms of sizes and topics for each pair
+   of entries;
+
+4. Save the entries in plain text format:\\
+   You can experiment with several strategies: (1) Save as text (2)
+   copy-paste or (3) use the =Edit/Edit source= option in Wikipedia;
+
+5. Maintain a consistent file-naming strategy and keep a record
+
+* Comparable corpora by manual collection
+  :PROPERTIES:
+  :CUSTOM_ID: comparable-corpora-by-manual-collection
+  :END:
+
+** Manual collection
+   :PROPERTIES:
+   :CUSTOM_ID: manual-collection
+   :END:
+
+1. Select 10-15 keywords for the topic of International Law in English
+   and in your language;
+
+2. Find relevant pages, possibly combining two-three keywords in a
+   query;
+
+3. Check the top 10 pages returned per query for their relevance. Is it
+   acceptable as a sample in your corpus? What are their genres? (use
+   the FTD categories discussed in Week 5)
+
+4. Save the relevant pages in plain text (some pages can be in PDF, DOC
+   or PPT formats);
+
+5. Maintain a consistent file-naming strategy and keep a record;
+
+6. Create a zip file with your corpus in plain text
+
+** Automated collection via the SketchEngine
+   :PROPERTIES:
+   :CUSTOM_ID: automated-collection-via-the-sketchengine
+   :END:
+
+1. Go to [[http://app.sketchengine.eu/]] and login (use the SSO login
+   option);
+
+2. Create two corpora by uploading your zipped files for each language;
+
+3. Compile your corpora (wait for the vertical representation to be
+   generated);
+
+4. Now you can check the keyword and terms extracted under 'Search
+   corpus';
+
+* Topics to discuss
+  :PROPERTIES:
+  :CUSTOM_ID: topics-to-discuss
+  :CLASS: unnumbered
+  :END:
+
+- Plain text files and boilerplate.
+
+- Comparable vs parallel corpora.
+
+- Variation in text types.
+
+- Consistency in terminology within and between languages.
+
+

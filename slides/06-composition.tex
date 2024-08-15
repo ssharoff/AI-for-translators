@@ -1,0 +1,609 @@
+% for slides
+%\documentclass{beamer}
+% for handout
+\documentclass[handout]{beamer}
+\usepackage{stdpresent}
+\usepackage{multirow}
+\usepackage{url}
+
+%\usepackage{times}
+
+\title{Know your corpus}
+\subtitle{Text typology for assessing evidence}
+
+\begin{document}
+
+\maketitlepage
+
+\section{Corpus development}
+\subsection{History: BC and BNC}
+
+\frame{
+
+  \frametitle{A reminder: the history of corpus development}
+  \begin{itemize}
+    \item Critical studies in China: Confucius index
+    \item Concordances: studying the Bible in the middle Ages
+    \item Early corpora: stenography (K\"ading), foreign language learning
+    \item Computer corpora (1960s): \textbf{Brown Corpus} (1962), LOB
+    \item Megacorpus era (1990s, 100+MW): Bank of English and \textbf{BNC}
+    \item Internet corpora (2000s, 1+GW): \textbf{ukWac}, en$10^{10}$
+  \end{itemize}
+}
+
+\frame[<+->]{
+
+  \frametitle{Corpus design}
+
+  %% strike$_{/VERB}$
+
+  \begin{block}{The Brown Corpus (1MW)}
+    \begin{enumerate}
+      \item 500 samples, 2000 words in each
+      \item written sources published in the USA in 1961
+      \item 15 genres (news, commentary, academic, 6 fiction genres: crime, scifi, humour \ldots)
+    \end{enumerate}
+  \end{block}
+
+  \begin{block}{The British National Corpus (100 MW)}
+    \begin{enumerate}
+      \item about 4,000 complete texts
+      \item 90\% of written sources, mostly published in 1980s,\\
+	10\% of spoken texts (context and demographic)
+      \item recording their domain, audience, genre: 70~categories
+{\small (W.fict.prose, W.ac.polit.law, W.ac.socsci, W.med, S.meeting, W.non.ac.socsci, W.non.ac.tech, S.interview.oral.history, \ldots)}
+    \end{enumerate}
+  \end{block}
+}
+
+\frame[<+->]{ \frametitle{Composition of Brown and BNC}
+  \begin{tabular}{rlrl}
+	& Brown				& BNC\\
+ 80 & J. Learned				& 501 & W.misc\\
+ 75 & G. Belles-lettres				& 432 & W.fict.prose\\
+ 48 & F. Popular lore				& 211 & W.pop.lore\\
+ 44 & A. News, reportage			& 186 & W.ac.polit.law.edu\\
+ 36 & E. Skill and hobbies			& 153 & S.conv\\
+ 31 & N. Fiction, adventure			& 138 & W.ac.socsci\\
+ 30 & H. Miscellaneous, government		& 132 & S.meeting\\
+ 29 & K. Fiction, general			& 128 & S.consult\\
+ 29 & P. Fiction, romance			& 127 & W.non.ac.socsci\\
+ 27 & B. News, editorial			& 123 & W.non.ac.techengin\\
+ 24 & L. Fiction, mystery			& 119 & S.interview.oral\\
+ 17 & D. Religion				& 112 & W.commerce\\
+ 16 & C. News, reviews				& 111 & W.non.ac.humanities\\
+ 9 & R. Fiction, humor				& 100 & W.biography\\
+ 6 & M. Fiction, science			& 95 & W.newsp.brdsht.misc\\
+  \end{tabular}
+}
+
+\subsection{Representativeness and sampling}
+%% \frame[<+->]{
+%%   \frametitle{Definitions (Sinclair, 1996)}
+
+%%     \begin{block}{A corpus}
+%% A collection of pieces of language that are selected and ordered according to explicit linguistic criteria in order to be used as a sample of the language.
+%%     \end{block}
+%%     \begin{block}{A computer corpus}
+%% A corpus which is encoded in a standardised and homogenous way for open-ended retrieval tasks. Its constituent pieces of language are documented as to their origins and provenance. 
+%%     \end{block}
+%%     \begin{itemize}
+%%       \item Is the archive of Project Gutenberg a corpus?
+%%       \item Is a collection of quotations a corpus?  (the OED model)
+%%       \item Can the Internet be considered as a corpus?
+%%     \end{itemize}
+%% }
+
+\frame[<+->]{
+  \frametitle{Representativeness and sampling}
+  \begin{itemize}
+    \item John Sinclair: 1987, 1991, 1996, 2003, 2005\\
+      Chapter 1 in Developing Linguistic Corpora, 2005 {\scriptsize \url{http://users.ox.ac.uk/~martinw/dlc/chapter1.htm}}
+    \item What is a corpus for?
+    \item [] ``for studying linguistic constructions reliably''
+    \item [] unlimitable language vs. limited corpus $\to$ sampling
+    \item Constraints on sampling a language:
+      \begin{enumerate}
+        \item Which language
+	\item Which texts
+	\item Which samples
+      \end{enumerate}
+  \end{itemize}
+
+}
+
+\section{Which language}
+\subsection{Traditional corpora}
+\frame[<+->]{
+  \frametitle{Language types for sampling}
+  \begin{itemize}
+    \item normative corpus -- standard language (`prestigious')
+    \item [] BC --- Brown Corpus of Standard American English
+    \item [] MICASE --- Michigan Corpus of Academic Spoken English
+    \item historical corpus -- a sample of language at a time
+    \item monitor corpus -- the same kind of language at regular intervals
+    \item demographic corpus
+    \item learner corpora
+    \item parallel and comparable corpora
+      \begin{itemize}
+      \item parallel for exact translations
+      \item comparable for roughly similar texts\\
+        Wikipedia articles in English and Chinese\\
+        Internet corpora as snapshots
+      \end{itemize}
+ \end{itemize}
+}
+
+
+\subsection{Web corpora}
+\frame[<+->]{ \frametitle{Google queries: Googleology}
+  \vspace{-2ex}
+  \includegraphics[width=0.7\textwidth]{cause-google.png}
+
+  \vspace{-2ex}
+\begin{itemize}
+  \item Advantages of corpora:
+    \begin{itemize}
+    \item Provenance of texts
+    \item Stable frequency counts, no repeated texts
+    \item Stable sort order
+    \item KWIC vs web snippets
+    \item Possibility of queries for lemmas and POS tags
+    \end{itemize}
+\end{itemize}
+}
+
+\section{Which texts}
+\subsection{Many kinds of texts}
+\frame[<+->]{ \frametitle{Genres of everyday life}
+ \includegraphics[width=\textwidth]{genres-3} 
+}
+
+\frame{ \frametitle{Annotation of ukWac}
+\begin{itemize}
+  \item ukWac: 2.5 mln \url{.uk} texts (Baroni, et al, 2009)
+{\small 
+  \item [] \url{http://news.ulster.ac.uk/releases/2001/319.html}
+  \item [] \url{http://otis.scotcit.ac.uk/onlinebook/otisT203.htm}
+  \item [] \url{http://site.commedia.org.uk/article/view/694/1/1/}
+  \item [] \url{http://www.afterdinnerspeaker.co.uk/testimonial.html}
+  \item [] \url{http://www.aldermanpeel.norfolk.sch.uk/private/News_easter_04/newslt.htm}
+  \item [] \url{http://www.arun.gov.uk/cgi-bin/buildpage.pl?mysql=2120}
+  \item [] \url{http://www.bettertogether.ac.uk/news.cfm?id=42}
+  \item [] \url{http://www.bias.org.uk/news_story.php?id=153_0}
+  \item [] \url{http://www.bjhc.co.uk/news/1/2004/n40929.htm}
+  \item [] \url{http://www.brookgallery.co.uk/artist.php?arid=77}
+  \item [] \url{http://www.buyagift.co.uk/products/5573.htm}
+  \item [] \url{http://www.cclrc.ac.uk/Activity/DL;WEBNAME=CCLRC;}
+  \item [] \url{http://www.chelmsford.gov.uk/index.cfm?articleid=10020}
+  %% \item [] \url{http://www.christianaid.co.uk/news/stories/050107s2.htm}
+  %% \item [] \url{http://www.church.org.uk/resources/sermondetail.asp?serId=610}
+  %% \item [] \url{http://www.codliveroil.co.uk/news/recipes3.htm}
+  %% \item [] \url{http://www.crawford2000.co.uk/news271102.htm}
+  %% \item [] \url{http://www.cryst.bbk.ac.uk/BBS/workshop99.html}
+  %% \item [] \url{http://www.dcs.shef.ac.uk/~amanda/ailect7.1.html}
+  %% \item [] \url{http://www.desperateseller.co.uk/affiliates/affiliates.html}
+  %% \item [] \url{http://www.donaldsons.co.uk/services/a/affordable-housing.aspx}
+  %% \item [] \url{http://www.dottieandbuzz.co.uk/favourite.html}
+  %% \item [] \url{http://www.essexcricket.org.uk/2005/news_oz_visit2.htm}
+  %% \item [] \url{http://www.euro.gov.uk/surveys_pages.asp?id=1&pg=4&ls=19}
+  %% \item [] \url{http://www.gfw.co.uk/recipearchive/recipe0102.html}
+  %% \item [] \url{http://www.hartpub.co.uk/books/reviews.asp?sc=1-901362-23-X}
+  %% \item [] \url{http://www.heacademy.ac.uk/km.htm}
+  %% \item [] \url{http://www.hewitts.co.uk/FarmingHTML/AgrMenu1.htm}
+  %% \item [] \url{http://www.iguk.co.uk/products/lotr-board-game-expansion-sauron-1116.aspx}
+  %% \item [] \url{http://www.incomesdata.co.uk/navigation/online.htm}
+  %% \item [] \url{http://www.incore.ulst.ac.uk/services/cds/themes/truth.html}
+  %% \item [] \url{http://www.itpr.co.uk/clients/case1.asp?code=Albany&ID=13}
+  %% \item [] \url{http://www.iwar.org.uk/law/resources/iwlaw/iwilendnotes.htm}
+  %% \item [] \url{http://www.lifesystems.co.uk/products/first_aid_kits/travel/index.shtml}
+  %% \item [] \url{http://www.link.co.uk/press/2006/mn_press_release_280106.htm}
+  %% \item [] \url{http://www.manifest.co.uk/news/2005/20050406TheTimes.htm}
+}
+\end{itemize}
+}
+
+\frame[<+->]{ \frametitle{ukWac URL domains}
+  \begin{tabular}{r|l}
+\# Docs & URL domain\\\hline
+    23875& cam.ac.uk\\
+    16653& ox.ac.uk\\
+    15870& ed.ac.uk\\
+    15780& demon.co.uk\\
+    14555& classic-literature.co.uk\\
+    11253& guardian.co.uk\\
+    9911& leeds.ac.uk\\
+    9051& bham.ac.uk\\
+    8423& gla.ac.uk\\
+    7617& ucl.ac.uk\\
+    6136& open.ac.uk\\
+    6126& soton.ac.uk\\
+    5665& freeserve.co.uk\\
+    5423& independent.co.uk\\
+    5135& man.ac.uk\\
+    4568& ex.ac.uk\\
+    4402& jolt.co.uk\\
+    4088& icnetwork.co.uk
+  \end{tabular}
+}
+\frame[<+->]{ \frametitle{ukWac examples in ac.uk}
+  \begin{block}{http://aspirations.english.cam.ac.uk/converse/alevel/growing.acds}
+\textit{Patrick Leigh Fermor. A Time of Gifts}\\
+\textit{Patrick Leigh Fermor is a British author, scholar and soldier, who was born in 1915. After being thrown out of school, he decided to walk across Europe from Holland to Turkey, and set out in 1933, just as Hitler began his rise to power.}\\ 
+Germany!... I could hardly believe I was there. For someone born in the second year of World War 1, those three syllables were heavily charged. Even as I trudged across it, early subconscious notions, when one first confused Germans with germs and knew that both were bad, still sent up fumes; fumes, moreover, which the ensuing years had expanded into clouds as dark and baleful as the Ruhr smoke along the horizon and still potent enough to unloose over the landscape a mood of - what?
+  \end{block}
+}
+
+\frame[<+->]{ \frametitle{ukWac examples in ac.uk}
+  \begin{block}{http://caialumni.admn.cai.cam.ac.uk/alumni/famous/c17.php}
+Preacher, best known for inventing the `Popish Plot', framing a number of Catholics at a time of great religious tension. Not seen as one of the College's great successes, and (I would like to make quite clear) he was only at Caius for two years before leaving for St. John's, so the college influence can (hopefully) be said to be small. \\
+\textbf{Jeremy Taylor} ( 1613-1667 ) Theologian, Bishop of Down and Connor and Vice-Chancellor of Trinity College Dublin. He owed his entire education to the foundation of Dr Perse. Taylor first attended the Perse school, before becoming a Perse Scholar then a Perse Fellow of Caius.
+  \end{block}
+}
+
+%% \frame[<+->]{
+%%   \frametitle{Which texts}
+%%   \begin{block}{Lists of genres}
+%%     \begin{itemize}
+%%        \item Fiction in BL: {\small Adventure stories, Detective stories, Picaresque literature, Robinsonades, Sea stories, Spy stories, Thrillers, Allegories, Didactic fiction, Fables, Parables, Alternative histories, Dystopias, Bildungsromane, Arthurian romances, } \ldots
+%%        \item Journalism: editorials, features, columns, news, reportage, analysis, letters to the editor \ldots 
+%%        %% \item Your daily life: essays, handouts, instructions, textbooks, notices, official regulations, minutes of meetings \ldots
+%%     \end{itemize}
+%%   \end{block}
+%%   \begin{itemize}
+%%   \item []
+%%     \begin{tabular}{|l|l||l|l|}
+%% \hline
+%%       \textbf{Superordinate}	&mammal	&literature	&journalism\\\hline
+%%       \textbf{Basic level}	&dog	&popular fiction&columns\\\hline
+%%       \textbf{Subordinate}	&spaniel&Sea stories	&feuilleton\\\hline
+%%     \end{tabular}
+%%   \end{itemize}
+%% }
+
+%% \frame[<+->]{ \frametitle{Multi-dimensional analysis (Biber, 1988)}
+%%  \includegraphics[height=0.8\textheight, width=0.8\textwidth]{biber-dim1-3} 
+%% }
+%% \frame[<+->]{ \frametitle{Multi-dimensional analysis (Biber, 1988)}
+%%   \begin{tabular}{lll}
+%% Functions 	& Linguistic features 	& Characteristic genres\\\hline\hline
+%% Dimension 1\\\hline
+%% Monologue 	& nouns, adjectives	& informational exposition\\
+%% Careful production & prepositional phrases &e.g., official documents\\
+%% Faceless	& long words		& academic prose\\\hline
+%% Interactive	& 1$^{st}$ and 2$^{nd}$ PPs 	& conversations\\
+%% Personal focus	& questions, reductions & (public and private)\\
+%% Involved	& stance verbs, hedges\\
+%% Online production& emphatics\\\hline\hline
+
+%% Dimension 3\\\hline
+%% Elaborated	& wh-relative clauses 	& official documents\\
+%% 		& pied-piping  		& professional letters\\
+%% 		& phrasal coordination 	& (exposition) \\\hline
+%% Situation-  	& time and place 	& broadcasts\\
+%% dependent 	& \hspace{2em} adverbials & (fiction)\\
+
+%%   \end{tabular}
+%% }
+
+%% \frame[<+->]{ \frametitle{External vs internal criteria}
+%%   \begin{block}{Biber's multidimensional approach}
+%% \begin{itemize}
+%%   \item Linguistic features which can be counted
+%%   \item [] Past tense, abstract nouns, \textit{that} deletions\\
+%%     74 features in (Biber, 1988)
+%%   \item Factor analysis: which features group with each other
+%%   \item [$\to$] Text dimensions: informational, narrativity, situation-dependent, etc
+%% \end{itemize}
+%%   \end{block}
+%% \begin{itemize}
+%%  \item Text-internal vs text-external definitions (Sinclair,2003)\\
+%%  \item [] corpus, features, translations
+%%   \item Genre vs register: social semiotics vs linguistic features 
+%% \end{itemize}
+%% }
+
+\subsection{Text-external and text-internal categories}
+\frame[<+->]{
+  \frametitle{A text typology according to Sinclair}
+  \begin{itemize}
+    \item [] \textbf{External parameters}
+    \item E1 --- origin
+    \item E2 --- mode
+    \item E3 --- aims 
+    \item [] E3.1 --- audience 
+    \item [] E3.2 --- intended outcome
+    \item [] \textbf{Internal parameters}
+    \item I1 --- domain
+    \item I2 --- style 
+  \end{itemize}
+}
+
+
+
+\frame[<+->]{
+
+  \frametitle{E1: the origin of a text}
+
+  \begin{itemize}
+    \item the year of text creation
+    \item the authorship ($single|multiple|corporate|unknown$)
+    \item the author's age ($child|teen|young|mid|senior$)
+    \item the author's sex ($male|female$)
+    \item the place of author's origin (native/non-native, British/American, Kent/Yorkshire \ldots)
+    \item originality ($original|compiled|translated$)
+  \end{itemize}
+}
+
+\frame{
+
+  \frametitle{E2: the mode and appearance of the text}
+
+  \begin{itemize}
+    \item the mode: $written|spoken|to-be-spoken|electronic$
+    \item for written texts:
+    \item [] printed (books, newspapers, magazines, ephemera)
+    \item [] typed (all sorts of reports and documentation)
+    \item [] correspondence (official, personal)
+  \end{itemize}
+}
+
+\frame{
+
+  \frametitle{E3.1: the audience of the text }
+
+  \begin{itemize}
+    \item the size of the audience\\
+      private:	2 / 3 / 5 / 6-20 / 21-50\\
+      public: small, medium, large, very large
+    \item the age of the audience
+    \item the constituency of the audience:\\
+      $general|informed|specialist$
+  \end{itemize}
+}
+
+\frame{
+
+  \frametitle{E3.2: Generalised aim of text production}
+
+  \begin{itemize}
+\item \textbf{instruction} {--} how-tos, FAQs, tutorials, handbooks
+\item \textbf{propaganda} {--} adverts, political pamphlets
+\item \textbf{recreation} {--} fiction, biographies and popular lore
+\item \textbf{regulations} {--} laws, admin, small print
+\item \textbf{reporting} {--} newswires, police reports
+\item \textbf{discussion} {--} all texts expressing positions and discussing a state of affairs
+  \end{itemize}
+}
+
+\frame{
+
+  \frametitle{Internal parameters: domains (BNC)}
+
+  \begin{itemize}
+    \item \underline{natsci}: mathematics, biology, physics, chemistry, geo, \ldots
+    \item \underline{appsci}: medicine, engineering, computing, military, \ldots
+    \item \underline{socsci}: law, history, philosophy, language, education,  \ldots
+    \item \underline{politics}: home affairs, world affairs
+    \item \underline{commerce}: finance, industry, agriculture,  \ldots
+    \item \underline{life}: fiction
+    \item \underline{arts}: drawing, literature, architecture, performing,  \ldots 
+    \item \underline{leisure}: sports, travels, fashion, entertainment \ldots
+  \end{itemize}
+}
+
+%% \frame[<+->]{
+%%   \frametitle{Which samples}
+%%   \begin{itemize}
+%%     \item Good sociology: sample of population
+%%     \item [] perception vs.~production\\
+%%       \textit{The Sun} vs.~\textit{The Morning Star}
+%%     \item Beware of ``rogue'' texts
+%%     \item [] danger of ``quality-language'' sources: \textit{wail, bark, grin}
+%%     \item Controlling text size
+%%     \item [] \textit{hobbits} or \textit{whelks} 
+%%     \item How do you know it is enough?
+%%     \item [] Saturation for linguistic features
+%%   \end{itemize}
+%% }
+
+%% \subsection{Comparing corpus composition}
+%% \frame{
+
+%%   \frametitle{Corpus composition: BNC against Internet corpora}
+%% {\tiny
+%% \begin{tabular}{|l|l|r|r|r|r|r|}
+%% \hline
+
+%% &&{\centering BNC}&{\centering I-EN}&{\centering I-RU}&{\centering I-DE}\\
+%% \hline
+%% \multirow{5}{*}{Authorship}	&Corporate	&18\%	&44\%	&38\%	&51\%\\
+%%                            	&Male   	&28\%	&23\%	&18\%	&13\%\\
+%%                            	&Female 	&13\%	&3\%	&6\%	&2\%\\
+%%                            	&Unknown	&4\%	&11\%	&15\%	&14\%\\
+%%                            	&Multiple	&36\%	&19\%	&23\%	&20\%\\\hline
+%% \multirow{3}{*}{Mode}      	&Written	&90\%	&86\%	&84\%	&90\%\\
+%%                            	&Electronic	&0\%	&13\%	&16\%	&9\%\\
+%%                            	&Spoken 	&10\%	&1\%	&0\%	&1\%\\\hline
+%% \multirow{3}{*}{Audience}  	&General	&27\%	&33\%	&40\%	&61\%\\
+%%                            	&Informed	&47\%	&45\%	&46\%	&31\%\\
+%%                            	&Professional	&26\%	&22\%	&14\%	&8\%\\\hline
+%% \multirow{5}{*}{Aim}       	&Discussion	&-	&45\%	&47\%	&45\%\\
+%%                            	&Information	&-	&11\%	&4\%	&25\%\\
+%%                            	&Recommendation	&-	&34\%	&35\%	&21\%\\
+%%                            	&Instruction	&-	&6\%	&3\%	&5\%\\
+%%                            	&Recreation	&-	&4\%	&11\%	&4\%\\\hline
+%% \multirow{8}{*}{Domain}    	&Life   	&27\%	&14\%	&25\%	&12\%\\
+%%                            	&Politics	&19\%	&12\%	&10\%	&21\%\\
+%%                            	&Business	&8\%	&13\%	&7\%	&5\%\\
+%%                            	&Natsci	 	&4\%	&3\%	&3\%	&1\%\\
+%%                            	&Appsci		&7\%	&29\%	&19\%	&18\%\\
+%%                            	&Socsci		&17\%	&16\%	&5\%	&8\%\\
+%%                            	&Arts		&7\%	&2\%	&2\%	&4\%\\
+%%                            	&Leisure	&11\%	&11\%	&26\%	&31\%\\\hline
+%% \end{tabular}
+%% }
+%% }
+
+\section{Which samples}
+\subsection{Reliability of annotation}
+\frame{ \frametitle{Reliability of annotation}
+  \begin{description}
+  \item [Brown cats] {\small A) News, reportage, B) News, editorial, C) News, Reviews, D) Religion, E) Skill and hobbies, F) Popular lore, G) Belles-lettres, H) Misc, J) Learned, K) Fiction, general, L) Fiction, mystery and crime \ldots}
+  \end{description}
+  \begin{block}{Reportage or Editorial?}
+{\small The most positive element to emerge from the Oslo meeting of North Atlantic Treaty Organization Foreign Ministers has been the freer, franker, and wider discussions, animated by much better mutual understanding than in past meetings. This has been a working session of an organization that, by its very nature, can only proceed along its route step by step and without dramatic changes…\\
+(“NATO Welds Unity” The Christian Science Monitor, 1961)    }
+  \end{block}
+}
+
+\subsection{Functional Text Dimensions}
+\frame[<+->]{ \frametitle{Functional Text Dimensions}
+    \small
+  \begin{description}
+\item [A1: argum] To what extent does the text argue to persuade the reader? (For example, an editorial or an argumentative blog entry) 
+\item [A8: news] To what extent is the text an informative report of recent events? (For example, a newswire)
+\item [A17: eval] To what extent does the text evaluate something? (For example, a product review)
+\item [A11: Personal] To what extent does the text report from  a first-person point of view? (For example, a personal diary)
+\end{description}
+
+  \begin{block}{Rating  Levels:}
+    \begin{tabular}{ll|l}
+      0 & none or hardly at all;&(Sharoff, 2018)\\
+      .5&slightly;\\
+      1 & somewhat or partly;\\
+      2 & strongly or very much so.
+    \end{tabular}
+  \end{block}
+}
+
+\frame{ \frametitle{Genres as syndromes}
+  {\footnotesize
+\setlength{\tabcolsep}{2pt}
+
+\begin{tabular}{l|rrrrrrrrrrrrrrrr}
+ & \textbf{A1} & A3 & \textbf{A4} & A5 & A6 & \textbf{A7} & \textbf{A8} & \textbf{A9} & \textbf{A11} & \textbf{A12} & \textbf{A13} & \textbf{A14} & A15 & 
+%% \textbf{A16} & 
+\textbf{A17} & 
+%% A18 & 
+A19 & \textbf{A20} \\ \hline
+TeleHTC	&	&	&	&	&	&	2.0	&	&	&	&	&	&	&	0.5	&	&	&	\\	
+TelsGoog	&	&	&	&	&	0.5	&	2.0	&	&	&	&	1.0	&	&	&	&	&	&	\\	
+UnitHR	&	&		&	&	&	&	&	&	2.0	&	&	&	2.0	&	&	&	&	&	\\	
+OpacTeam	&	2.0	&		&	&	&	&		&	1.0	&	&	&	&	2.0	&	&	0.5	&	&	&	\\	
+TediJordan	&	2.0	&	2.0	&	&	0.5	&	0.5	&	&	&	&	2.0	&		&	0.5	&	&	&	&	&	\\	
+NewsGueye	&	&	1.0	&	&	0.5	&	0.5	&	&	2.0	&	&	&	&	&	&	&	&	&	\\	
+Bib1Amos	&	&	1.0	&	1.0	&	&	&	&	&	0.5	&	1.0	&	&	2.0	&	&	1.0	&	&	1.0	&	\\	
+FictTolstoy	&	&	1.0	&	2.0	&	1.0	&	&	&	&	&	&	&	&	&	&	&	2.0	&	\\	
+\end{tabular}
+}
+  \begin{block}{(Halliday, 1992)}
+a register is a syndrome of lexicogrammatical probabilities
+  \end{block}
+
+}
+
+\frame[<+->]{ \frametitle{Automatic genre classification}
+  \small
+  \begin{tabular}{rl|rl|rl}
+ & Brown & & BNC & & ukWac\\
+163 & fiction         & 786 & argument        & 500371 & promotion\\
+111 & argument        & 616 & fiction         & 305376 & info\\
+78 & info     & 429 & personal        & 266763 & argument\\
+29 & news     & 390 & info    & 236857 & news\\
+14 & personal         & 336 & news    & 220880 & instruction\\
+13 & review   & 271 & promotion       & 154900 & review\\
+12 & promotion        & 132 & legal   & 150201 & personal\\
+11 & academic         & 101 & instruction     & 74291 & legal\\
+11 & instruction      & 91 & academic         & 71147 & academic\\
+7 & legal     & 83 & review   & 39150 & fiction\\
+6 & academ/info     & 10 & pers/argum        & 5335 & news/argum\\
+2 & argum/info     & 7 & academ/info     & 4913 & argum/news\\
+2 & info/fiction      & 6 & argum/news     & 3671 & academ/info\\
+2 & news/argum     & 6 & argum/pers         & 3125 & info/academ\\
+1 & argum/news     & 5 & fiction/pers  & 2968 & promo/news\\
+1 & argum/pers         & 5 & news/argum     & 2793 & news/promo\\
+1 & fiction/info      & 5 & pers/fiction  & 2334 & instruct/promo\\
+1 & fiction/pers  & 4 & argum/info     & 2288 & instruct/info\\
+1 & info/academ     & 3 & info/academ     & 2252 & promo/review\\
+1 & info/instruct  & 3 & info/argum     & 2233 & promo/instruct\\
+1 & pers/argum         & 3 & instruct/info  & 2086 & review/promo\\
+1 & promo/review  & 2 & info/legal        & 1999 & info/instruct\\
+1 & review/pers   & 2 & legal/info        & 1820 & review/pers\\
+  \end{tabular}
+}
+
+\subsection{Web corpora}
+
+\begin{frame}[<+->]{Specialised domains}
+ \begin{description}
+\item[{BNC}] \verb~arts,medical,natsci,socsci,techeng~
+\item[{??}] Domains are not well represented:\\
+24 texts, 1.4 mln words for medicine\\
+  15 texts, 0.6 mln words for linguistics\\
+  4 texts, 0.1 mln words for chemistry
+\end{description}
+\end{frame}
+
+\begin{frame}[fragile]{Trafilatura for web scraping}
+  Starting with a list of URLs:
+\begin{verbatim}
+topic_list=['International law','Human rights','ius gentium']
+top_url='https://en.wikipedia.org/wiki/'
+!pip install trafilatura
+import trafilatura
+for (i,topic) in enumerate(topic_list):
+  url=top_url+topic
+  downloaded = trafilatura.fetch_url(url)
+  plain_text = trafilatura.extract(downloaded)
+  out_file = open(str(i)+".txt",mode="w")
+  print(f'{url} to {out_file}')
+  print(url, file=out_file)
+  print(plain_text, file=out_file)
+  out_file.close()
+\end{verbatim}
+\end{frame}
+
+
+\frame{  \frametitle{Basic points}
+  \begin{itemize}
+    \item Corpora vs.~text collections 
+    \item Basic types of corpora
+    \item Representativeness and sampling
+    \item Assessing texts using text typologies
+    \item Reliability of annotation:\\
+      Assessing for functional dimensions
+    \item Web corpus collection
+  \end{itemize}
+  %% \begin{block}{For the seminar}
+  %%   \begin{itemize}
+  %%      \item Download a list of webpages from\\
+  %%        {\small \url{http://corpus.leeds.ac.uk/teaching/modl5007/}}
+  %%      \item Assess each page in terms of the text typology
+  %%   \end{itemize}
+  %% \end{block}
+}
+
+%% \section{Designing your own corpus}
+%% \subsection{Parameters for corpus collection}
+%% \frame[<+->]{
+
+%%   \frametitle{Designing your own corpus}
+%%   \begin{itemize}
+%%     \item select your corpus parameters
+%%     \item collect texts (publishers, Internet, CDs)
+%%     \item clean them (HTML, PDF, Word documents $\rightarrow$ plain text)
+%%     \item control the collection in terms of its balance
+%%   \end{itemize}
+%%   \begin{block}{Collecting corpora from the Internet}
+%%     \begin{itemize}
+%%       \item take a list of seed words most specific for your corpus
+%%       \item create 3-4 word queries from your words
+%%       \item use Google/Yahoo to retrieve URLs returned for a query 
+%%       \item clean up (removal of navigation frames, markup, duplicates and near-duplicates, etc)
+%%     \end{itemize}
+%%   \end{block}
+%% }
+
+
+\end{document}
