@@ -116,7 +116,7 @@ And in our hearts, forever supreme.\\
     +   :: They can also adapt their output via *prompt engineering*
     + NMT has been trained on good quality parallel resources, mostly from public institutional repositories (Europarl, UN or instruction manuals)\\
       LLMs have been trained on comparable corpora by sharing parameters
-    + Advantages of comparable corpora cite:sharoff13buccoverview\\
+    + Advantages of comparable corpora cite:sharoff23bucc\\
       More data, more topics, more genres, lack of translationese
     + LLMs are much heavier in deployment: billions of parameters 
 
@@ -198,7 +198,7 @@ The word "figurant" in French means "appearing" or "featured". In this context, 
 ** Other possibilities with LLMs
 *** Term extraction
 \footnotesize
- + For the English sentence "Composite packaging waste consisting of mainly paper and some plastic [and aluminium], not containing residues" and its French translation "Déchets d'emballages composites principalement constitués de papier et de plastique [ et d'aluminium ] ne contenant pas de résidus", extract terms and type each English term and its French equivalent.
+ + For the English sentence "Composite packaging waste consisting of mainly paper and some plastic (and aluminium), not containing residues" and its French translation "Déchets d'emballages composites principalement constitués de papier et de plastique (et d'aluminium) ne contenant pas de résidus", extract terms and type each English term and its French equivalent.
 
 #+begin_verse
 English terms:
@@ -206,14 +206,14 @@ Composite packaging waste
 mainly
 paper
 some plastic
-[and aluminium]
+(and aluminium)
 not containing residues
 French equivalents:
 Déchets d'emballages composites
 principalement
 papier
 de plastique
-[et d'aluminium]
+(et d'aluminium)
 ne contenant pas de résidus
 #+end_verse
 
@@ -394,7 +394,7 @@ Czech source: /Proto se nakonec hodnota odpadu neodečítala./\\
 Human reference: /Therefore, at the definitive stage, the deduction for waste was reversed./\\
 Machine translation: /Therefore, in the end, the value of waste was not deducted./\\
 
-+ Stars: \bigstar \bigstar \bigstar \bigstar
++ Stars: $\bigstar \bigstar \bigstar \bigstar$
 + \to :: The translation is accurate and captures the meaning of the original sentence well, but there is a slight difference in the phrasing of the English reference. Instead of "reversed", the translation uses "not deducted", which is a more literal and straightforward interpretation of the original.
 
 
@@ -410,8 +410,7 @@ Czech source: "Proto se nakonec hodnota odpadu neodečítala."\\
 Machine translation: /Therefore, in the end, the value of waste was not deducted./\\
 Stars:
 
-+ Stars: \bigstar \bigstar \bigstar \bigstar
-
++ Stars: $\bigstar \bigstar \bigstar \bigstar \bigstar$
 
 
 
