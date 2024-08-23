@@ -40,7 +40,7 @@ At the end of these classes, you should be able to:
 
 ** Running your first script
  1. Save the notebooks from this week's folder to your M Drive
- 2. Upload healthy-linguist.ipynb to Google colab
+ 2. Upload healthy-linguist.ipynb to Python environment
  3. Run it cell by cell until you reach the end.
  4. Modify the variables for your name and age and run again.
  5. Now upload word-frequency.ipynb and run it.
@@ -62,20 +62,20 @@ At the end of these classes, you should be able to:
 
    This should install the trafilatura module for processing web pages.  When you need any extra module, you can install it in this way by replacing ~trafilatura~ with the name of that module.
 ** Processing Web pages
- 1. Use the notebook corpus-collect.ipynb
- 2. Make sure it has access to your Google Drive (running Cell 3 will request this connection)
- 3. Test it first (you can stop it once it's started).  Apply it to a website you have identified as highly relevant to your specialised corpus domain. There is a variable to control this.
- 4. How can you save your results to a different folder? Possibly to a different subfolder for each language?
- 5. What happens with scraping from different websites? Please check the description of Javascript and the role it plays in rendering websites.
+ 1. Use the notebook corpus-collect-list.ipynb
+ 2. Make sure it has access to your Google Drive (running Cell 3 will request this connection). If you use your own environment, modify the script to link the file collection to the right location.
+ 3. If you want more broad crawling, use corpus-collect-list.ipynb and apply it to a website you have identified as highly relevant to your specialised corpus domain. There is a variable to control this.
+ 5. How can you save your results to a different folder? You're likely to need to save them to a different subfolder for each language?
+ 6. What happens with scraping from different websites? Please check the description of Javascript and the role it plays in rendering websites.
 
 * Text processing
 ** Extract linguistic features
- 1. Read a text from your corpus (by modifying the filename in ~linguistic.ipynb~) and determine:
+ 1. Read a text from your corpus (by modifying the filename in linguistic-annotation.ipynb) and determine:
     + its genre (use HuggingFace model ~ssharoff/genres~)
     + its mood (model ~bhadresh-savani/distilbert-base-uncased-emotion~; you might need to collect less formal texts first; keep your file structure separate for each corpus)
     + its named entities
  2. Try this processing with a text in a different language.
- 3. Modify ~linguistic.ipynb~ to run this processing to annotate *all* files in your corpus. (Keep in mind that you have files for two languages).  If your filenames follow a pattern with numbers, check the documentation for ~range~ to generate a list of numbers.  See also the example of how names are generated in a loop in corpus-collect.ipynb.  Otherwise, you can run your for-loop through an explicit list of filenames.
+ 3. Modify linguistic-annotation.ipynb to run this processing to annotate *all* files in your corpus. (Keep in mind that you have files for two languages).  If your filenames follow a pattern with numbers, check the documentation for ~range~ to generate a list of numbers.  See also the example of how names are generated in a loop in corpus-collect.ipynb.  Otherwise, you can run your for-loop through an explicit list of filenames.
  4. What is the statistics of each genre or emotion label? Can you create a dictionary of the more common names in each category?
  5. What happens if you work with a language other than English?  Are the classifiers still accurate?  You can explore more models at https://huggingface.co/models (focus on Token classification and Text classification models)
 
@@ -85,11 +85,11 @@ At the end of these classes, you should be able to:
  3. Compare the keywords for the respective frequency lists. As a template for this task use word-keyness.ipynb.
 
 * Terminology extraction
-  1. Make a copy of the named entity recognition part from ~linguistic.ipynb~
-  2. Replace its processing with model ~tthhanh/xlm-ate-nobi-mul~
+  1. Run terminology extraction with terminology-experiments.ipynb
   3. Check the codes it outputs. Anything other than ~LABEL_0~ indicates a term
   4. Generate a list of terms from your corpus in English
-  5. Generate a list of terms from your corpus in another language 
+  5. Generate a list of terms from your corpus in another language
+     
 * Debugging
 You can feel frustration when a python script does not work as intended. This is common experience with many tools including python. They do not always follow your expectations, but they can process many more things, so that you can devote your time to something more interesting. Find ways to adapt.  In particular:
   1. Please experiment by modifying the script: you can always return back to the original script as posted by the tutor. Once you know your own script does at least something important, you can save it under a new name, so that if you make any further modifications, they do not impact the version you know works.
