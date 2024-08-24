@@ -1,6 +1,14 @@
-*MODL5007:* *Introduction to Corpus Linguistics for Translators*
+#+TITLE: Corpus collection
+#+DATE: 
+#+LATEX_HEADER: \usepackage{times}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \usepackage{fullpage}
+#+LATEX_HEADER: \usepackage{todonotes}
+#+LATEX_HEADER: \setlength{\marginparwidth}{1.5cm}
+#+LATEX_HEADER: \newcommand{\td}[2][ss]{\todo[color=yellow]{\scriptsize #2 #1\par}}
+#+LATEX_HEADER: \usepackage{paralist}
+#+LaTeX_HEADER: \let\itemize\compactitem
 
-*/Corpus collection/*
 
 * Outline of exercises
   :PROPERTIES:
@@ -11,11 +19,8 @@
 On completion of these exercises, you should be able to:
 
 - Navigate in Wikipedia categories to find comparable texts;
-
 - Create a small corpus of comparable texts from Wikipedia;
-
-- Create a bigger corpus by making queries to Google;
-
+- Create a bigger corpus by making queries to a search engine;
 - Load this corpus into Sketchengine to extract terminology.
 
 * Comparable corpora from Wikipedia
@@ -70,8 +75,7 @@ On completion of these exercises, you should be able to:
    :CUSTOM_ID: automated-collection-via-the-sketchengine
    :END:
 
-1. Go to [[http://app.sketchengine.eu/]] and login (use the SSO login
-   option);
+1. Go to [[http://app.sketchengine.eu/]] and login;
 
 2. Create two corpora by uploading your zipped files for each language;
 
