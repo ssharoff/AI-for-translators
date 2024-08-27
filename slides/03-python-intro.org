@@ -11,16 +11,16 @@
 
 ** Computational thinking
 *** Computational thinking
-    + How to think like a computer scientist\\
+    + /How to think like a computer scientist/\\
       https://openbookproject.net/thinkcs/
       + Precision in formulating descriptions
       + Problem solving
-**** Our tasks in learning 
+**** Our tasks in learning Python
 #+ATTR_BEAMER: :overlay <+->
      + Introduction into basic concepts
-     + Python for corpus collection
+     + Running for corpus collection
      + Text annotation: genres and emotions
-     + Keyword analysis for your projects
+     + Keyword analysis
 ** Basic terms
 *** Basic terms
 #+ATTR_BEAMER: :overlay <+->
@@ -28,7 +28,7 @@
  + Bugs :: /programming errors/
  + Debugging :: /finding and fixing programming errors/
  + Syntactic errors :: /when the syntax of the code is incorrect/ \\
-   e.g. “1+"two"” is not legal\\
+   e.g. 1+"2" is not legal\\
    \includegraphics[width=0.8\textwidth]{syntaxerror.png}
  + Semantic errors :: /the program does not do what you want it to do/
 *** Basic concepts
@@ -36,25 +36,25 @@
  + Data type :: A class of data:
    + integers, floating points, strings, lists, dictionaries and *objects*
    + Each data type defines operations that can (and thereby cannot) be done on the data
- + Variable :: a storage location (a variable name and data)
+ + Variable :: a storage location (a name and data)
  + Function :: A piece of code that can be re-used
  + Method :: A function that is associated with an object
- + Class :: a template of a variable:
+ + Class :: a template of an object:
    + defines how variables, functions, and methods work together and what we can do with them
 ** Python
 *** Python
 #+ATTR_BEAMER: :overlay <+->
  + First released in 1991 by Guido van Rossum
- + Current version: we will use version 3.9
+ + Current version: we will use version 3.10
  + Name based on the British comedy group Monty Python
  + Easily readable syntax:\\
-   ~for key in dictionary:~\\
-     \hspace{2em} ~print(key,dictionary[key])~
+   ~for headword in dictionary:~\\
+     \hspace{2em} ~print(headword,dictionary[headword])~
  + Block of code is grouped by indentation
- + Python scripts \to files which can be executed by the interpreter
- + Python notebooks \to scripts with a record of interaction
- + File extensions \to .py (for scripts), .ipynb (for notebooks)
- + Google Colab for the notebook interface
+ + Python scripts :: files which can be executed by Python
+ + Python notebooks :: scripts with a record of interaction
+ + File extensions: .py (for scripts), .ipynb (for notebooks)
+ + Google Colab/Jupyter Labs for the notebook interface
 
 *** Hello world
 #+BEGIN_SRC python
@@ -71,7 +71,7 @@ print(s.split("l"))
   + Function :: print()
   + Methods :: upper(), split(), find(), startswith()...
 #+ATTR_BEAMER: :overlay <+->
-  + Now open an empty notebook in Google Colab, type the commands at the top as cells and execute them
+  + Now open an empty notebook, type the commands at the top as cells and execute them
      
 * First real Python program
 ** Word frequency distribution
@@ -119,7 +119,7 @@ print(s.split("l"))
 *** Word frequency distribution
 #+BEGIN_SRC python
   import re
-  text = requests.get("http://corpus.leeds.ac.uk/teaching/modl5007/parrot.txt").text
+  text = requests.get("https://ssharoff.github.io/modl5007/parrot.txt").text
   text = text.lower()
   corpus_count = 0
   dictionary = {}
@@ -225,15 +225,11 @@ favorite_color == blue
     #+begin_src python
     def min3(a, b, c):
     if a < b:
-        if a < c:
-            return a
-        else:
-            return c
+        if a < c: return a
+        else: return c
     else:
-        if b < c:
-            return b
-        else:
-            return c
+        if b < c: return b
+        else: return c
     #+end_src
   + A more elegant way:\\
     #+begin_src python
