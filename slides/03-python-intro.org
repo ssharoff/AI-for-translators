@@ -51,14 +51,14 @@
    ~for headword in dictionary:~\\
      \hspace{2em} ~print(headword,dictionary[headword])~
  + Block of code is grouped by indentation
- + Python scripts :: files which can be executed by Python
- + Python notebooks :: scripts with a record of interaction
+ + Scripts :: files which can be executed by Python
+ + \small Notebooks :: scripts within an interactive environment
  + File extensions: .py (for scripts), .ipynb (for notebooks)
  + Google Colab/Jupyter Labs for the notebook interface
 
 *** Hello world
 #+BEGIN_SRC python
-s = "Hello world"
+s = "Hello world!"
 print(s)
 print(s.upper())
 print(s.split())
@@ -71,7 +71,7 @@ print(s.split("l"))
   + Function :: print()
   + Methods :: upper(), split(), find(), startswith()...
 #+ATTR_BEAMER: :overlay <+->
-  + Now open an empty notebook, type the commands at the top as cells and execute them
+  + Now you can open an empty notebook, type the commands at the top as cells and execute them
      
 * First real Python program
 ** Word frequency distribution
@@ -85,6 +85,11 @@ print(s.split("l"))
     +-----------+
     | read file |        
     +-----------+
+	 |
+	 v
+    +----------+
+    | text {o} |        
+    +----------+
 	 |
 	 v
   +------------------+    +--------------+
@@ -102,13 +107,13 @@ print(s.split("l"))
    +------------+                         +---------------+
 	 |
 	 v
-  +---------------------+     +-------------------+
-  | display counts {io} |---->| (word, count) {o} |
-  +---------------------+     +-------------------+
+  +----------------+       +-------------------+
+  | get count {io} |------>| (word, count) {o} |
+  +----------------+       +-------------------+
 				       |	  
 				       v        
 				+------------+    +------------------+
-				| good?? {c} |--->| print(word, ipm) |	
+				|  good? {c} |--->| print(word, ipm) |	
 				+------------+    +------------------+
 
 #+END_SRC
@@ -124,7 +129,7 @@ print(s.split("l"))
   corpus_count = 0
   dictionary = {}
   for sentence in text.split(". "):
-    for word in sentence.split(" "):
+    for word in sentence.split():
       corpus_count += 1
       word = re.sub("[^a-z-]+","",word)
       if word in dictionary: dictionary[word] += 1
@@ -154,13 +159,15 @@ print(s.split("l"))
 #+ATTR_BEAMER: :overlay <+->
   + Arithmetic operators: 2+2; 5-2; 7*3; 5/2\\
     Also for strings "Hello "+"world"
-  + Assignment operators: ~a = 2; b = 2~\\
-    ~a = b +2~\\
+  + Assignment operators: ~a = 1; b = 2~\\
+    ~a = b + 3~\\
     ~a += 2~
+  + Q? :: What is the value of /a/ now?
   + Comparison operators: ~a>2~\\
-    ~(b>=2 and 7*3==21)~\\
+    ~(b>=2 and a*3==21)~\\
     ~not 5/2==2;  int(5/2)==2~ 
-  + Membership operator: ~a in [5, 6, 7]~
+  + Membership operator: ~a in [5, 6, 7]~\\
+    ~"eel" in "My hovercraft is full of eels"~
 *** Variables
   + Legal naming conventions:
     standard characters, numbers (not at the start) and underscores
@@ -171,7 +178,7 @@ print(s.split("l"))
     Title_Case
     snake_case
 #+END_SRC 
-  + Q :: What is the difference between:
+  + Q? :: What is the difference between:
 #+begin_src python
 favorite_color = "blue"
 favorite_color == "blue"
@@ -215,7 +222,7 @@ favorite_color == blue
       else:
 	  return b
     #+end_src
-  + Find the minimum of three numbers:\\
+  + Q? :: Find the minimum of three numbers:\\
     7 or 3 or 25?
 
 *** Compute the minimum of three numbers
@@ -239,7 +246,7 @@ favorite_color == blue
     else
         return min(b,c)
     #+end_src
-  + Homework :: Write min4(a,b,c,d)
+  + HW :: Write min4(a,b,c,d)
 
 
 *** Import statement
@@ -250,7 +257,7 @@ favorite_color == blue
     import re
     re.findall(regex, string)
     re.findall(".[aeiou]","Monty Python") \to "Mo","ho"
-    re.sub("[^a-z-]+","","Monty Python") \to "MontyPython"
+    re.sub("[^a-z-]+","","fjords?!?!?!?") \to "fjords"
     #+end_src
   + Trafilatura for web scraping:\\
     #+begin_src 
@@ -298,26 +305,27 @@ favorite_color == blue
     ~for url in url_list:~\\
     \hspace{1em} ~print(f"We are processing: {url}")~
   + Note the possibility to include variables into strings:\\
-    ~print("We are processing: {url}")~
+    ~print(f"We are processing: {url}")~
   + ~assert~ stops execution if something is not right\\
     ~assert len(url_list)>0, "Empty url list"~
 
 *** AI frameworks
   + Various AI models can help you with writing code:\\
     Ask ChatGPT, Claude, Copilot, Google Colab etc to:\\
-    /Write a function which gets an HTML file as its parameter and uses the Trafilatura library to extract its text content./
+    /Write a function which gets a downloaded HTML file as a parameter and uses the Trafilatura library to extract its text content./
   + Use the right prompts: be as specific as possible 
-  + Understanding their output and *your* ability to modify it
-  + Be inquisitive and ask AI models why a specific line behaves in this way
-  + Be liberal with your own commentaries: literate programming
+  + Aim at understanding their output and *your* ability to modify it
+  + Be inquisitive: ask AI models why a specific line behaves in the way the AI model suggested
+  + Be liberal with writing your own commentaries:\\
+    literate programming
 
 *** Projects
   + Think of mini-projects which involve:
     + data collection
     + annotation
     + terminology extraction, etc
-  + Run this in *two* languages
-  + Each mini-project for two-three people:
+  + Run this project in *two* languages
+  + Each mini-project can consider two-three people:
     + Dividing the tasks
     + Testing
     + Code review (another pair of eyes)
