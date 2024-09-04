@@ -1,7 +1,7 @@
 % for slides
-%% \documentclass{beamer}
+ \documentclass{beamer}
 % for handout
-\documentclass[handout]{beamer}
+%% \documentclass[handout]{beamer}
 
 \usepackage{stdpresent}
 
@@ -20,14 +20,21 @@
 \frame{\titlepage}
 
 \section{The size matters}
-\frame[<+->]{ \frametitle{Data science for translators}
+
+\begin{frame}[<+->]{Knowledge in Large Language Models}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{sigmoid-3k.pdf}
+\end{center}
+
+\vspace{-2ex}
 \begin{itemize}
-  \item ChatGPT and other AI models: Large Language Models
-  \item [$\to$] Large corpora: 90,000 years of reading for ChatGPT
-  \item Statistics for understanding how LLMs and MT engines work
-  \item Future careers for engaging with model developers
+\item \textit{shine of the \ldots{} upon the harbour}\\
+\textit{light of the \ldots{} shining between clouds}\\
+$$p(w, c_{1:m})=\frac{1}{1+e^{-\sum w\cdot c_i}}$$
+\item \textit{shine of the \alert{blood} upon the harbour} \(\to\) 0
 \end{itemize}
-}
+\end{frame}
+
 \frame[<+->]{
   \frametitle{History of corpus development}
   \begin{itemize}
