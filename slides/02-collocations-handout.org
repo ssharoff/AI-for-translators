@@ -18,7 +18,7 @@ For some words of interest to study their collocation properties:
 
 Start with the words in your native language, as it'll make it easier to interpret the words. Try testing this with one word in each language before the Thursday class.
 
-The following interfaces can produce collocation lists:
- + Aranea :: \url{http://aranea.juls.savba.sk}
- + SketchEngine ::  Use the institutional login for Leeds when accessing from home\\
-   \url{http://app.sketchengine.eu/}
+The following interfaces can produce collocation lists easily:
+ + Aranea :: [[http://aranea.juls.savba.sk]]
+ + SketchEngine :: [[http://app.sketchengine.eu/]]
+ + BYU :: [[https://www.english-corpora.org/]]
