@@ -47,7 +47,7 @@ At the end of these classes, you should be able to:
 ** Understanding word frequency distribution
  1. What does it do when it sees a word NOT in its dictionary yet?
  2. How many lines does it print?
- 3. How does it compute IPM? What is the total word count for this text
+ 3. How does it compute IPM? What is the total word count for this text?
  4. How does it choose which words to output?
  5. Can you check the total number of words recorded in the dictionary?
 ** Modify the word frequency script
@@ -56,6 +56,18 @@ At the end of these classes, you should be able to:
  2. At the end of the script, print the number of words it outputs.
  3. Change the word selection conditions to include more words.
  4. Look into the Python documentation for ~defaultdict~. Simplify our script by using it.
+ 5. Add a function to save the dictionary a plain text file with the structure: \\
+    word<TAB>real word frequency<TAB>normalised ipm frequency.
+
+
+** Getting the keywords
+  1. You can experiment with your own data or with the files available under the Corpora folder on Minerva (you will have to *uncompress* them to make the usable). If using Colab, upload them to a folder and make sure that ~gdrive~ point to the right folder.
+  2. Upload word-keyness.ipynb and run it.
+  3. Repeat the same process with more files.
+  4. Add a function to save the most important keywords. (Usually they need to have the LL-score above 11, check statistics textbooks).
+  5. Modify the script to include the possibility to repeat it over several files.
+  6. Experiment with your languages. For Chinese try using the jieba library, for Japanese try using mecab. There is also a multilingual interface of spaCy.
+
 * Process web pages
 ** Installation of additional modules
    Run: ~!pip install trafilatura~

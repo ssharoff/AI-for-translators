@@ -3,7 +3,7 @@
 #+DATE: 
 # +OPTIONS: toc:t
 #+LaTeX_CLASS: beamer
-#+LaTeX_CLASS_OPTIONS: [handout]
+# +LaTeX_CLASS_OPTIONS: [handout]
 #+LATEX_HEADER: \usepackage{stdpresent}
 #+LATEX_HEADER: \usepackage{apalike}
 # #+LATEX_HEADER: \usepackage{tikz}
@@ -67,7 +67,7 @@ Thou art the cheese of kings and queens,\\
 And in our hearts, forever supreme.\\
 
 # Write an amendment to the 
-*** \footnotesize /American Constitution Amendment on socks disappearing in washing machine/
+*** COMMENT \footnotesize /American Constitution Amendment on socks disappearing in washing machine/
 \footnotesize
 # provide for the common defense,
 \textbf{Preamble:} We the people of the United States, in order to form a more perfect union, establish justice, ensure domestic tranquility, promote the general welfare, and secure the blessings of liberty to ourselves and our posterity, do hereby address the issue of socks disappearing in the washing machine.
